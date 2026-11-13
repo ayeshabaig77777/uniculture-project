@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Dashboard | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo">
+
+<div>
+
+<span class="uni">Uni</span>
+<span class="culture">Culture</span><br>
+
+<small class="tagline">
+Bringing Cultures Together
+</small>
+
+</div>
+
+</div>
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+<a href="contribute.html" class="contribute-btn protected-btn">
+        Contribute
+    </a>
+</nav>
+
+<span id="auth-area"></span>
+
+</header>
+
+
+<div id="notLoggedIn" class="empty-box" style="display:none; margin:60px auto; max-width:500px;">
+  <h3>Please Login</h3>
+  <p>Login to see your dashboard.</p>
+</div>
+
+<div id="dashboardContent" style="display:none;" class="dash-layout">
+
+  <main class="dash-main">
+
+    <section class="profile-hero">
+
+      <div class="profile-hero-overlay">
+
+        <div class="profile-avatar-ring">
+          <div class="profile-avatar" id="profileAvatar">?</div>
+        </div>
+
+        <div>
+          <p class="hero-welcome">Welcome back,</p>
+          <h1 id="profileGreeting">Naeema Hameed</h1>
+          <p class="hero-quote">"Celebrate. Contribute. Connect. You are a part of something beautiful."</p>
+
+          <div class="hero-tags">
+            <span class="hero-tag" id="memberSinceTag">📅 Member since —</span>
+            <span class="hero-tag hero-tag-gold" id="levelTag">⭐ Level 1 · Newcomer</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero-impact">
+        <p class="impact-title">🌱 Your Impact</p>
+        <p class="impact-sub">Thank you for helping preserve our rich cultural heritage.</p>
+        <div class="impact-points-row">
+          <span class="impact-points" id="impactPoints">0</span>
+          <svg id="impactSparkline" viewBox="0 0 100 30" class="impact-sparkline"></svg>
+        </div>
+        <p class="impact-label">Points Earned</p>
+      </div>
+
+    </section>
+
+    <div class="dashboard-stats" id="dashboardStats">
+      <!-- stat cards injected here -->
+    </div>
+
+    <div class="dashboard-columns">
+
+      <div class="dashboard-block" id="myContributionsBlock">
+        <div class="block-header">
+          <h2>My Contributions</h2>
+          <a href="contribute.html" class="view-all-link">View all →</a>
+        </div>
+        <div id="myContributionsList"></div>
+        <a href="contribute.html" class="create-contribution-btn">+ Create New Contribution</a>
+      </div>
+
+      <div class="dashboard-block">
+        <div class="block-header">
+          <h2>Recent Activity</h2>
+        </div>
+        <div id="recentActivityList" class="activity-timeline"></div>
+      </div>
+
+      <div class="dashboard-block" id="contributionProgress"></div>
+
+    </div>
+
+    <div class="dashboard-columns">
+
+      <div class="dashboard-block" id="badgesBlock">
+        <div class="block-header">
+          <h2>My Badges</h2>
+        </div>
+        <div id="badgesList" class="badges-grid"></div>
+      </div>
+
+      <div class="dashboard-block" id="myFavoritesBlock">
+        <div class="block-header">
+          <h2>My Favorites</h2>
+        </div>
+        <div id="myFavoritesList" class="mini-card-grid"></div>
+      </div>
+
+      <div class="dashboard-block" id="recentlyViewedBlock">
+        <div class="block-header">
+          <h2>Recently Viewed</h2>
+        </div>
+        <div id="recentlyViewedList" class="mini-card-grid"></div>
+      </div>
+
+    </div>
+
+    <div class="dashboard-block" id="savedPostsBlock">
+      <div class="block-header">
+        <h2>Saved Posts <span class="section-note">(from Community page)</span></h2>
+      </div>
+      <div id="savedPostsList"></div>
+    </div>
+
+  </main>
+
+</div>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="profile.js"></script>
+
+</body>
+
+</html>

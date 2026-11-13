@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=7">
+
+</head>
+
+<body class="admin-body">
+<script src="theme.js"></script>
+
+<div class="admin-shell">
+
+  <aside class="admin-sidebar">
+
+    <div class="admin-sidebar-brand">
+      <img src="images/logo1.png" class="logo">
+      <div>
+        <strong>UniCulture</strong>
+        <small>Admin Panel</small>
+      </div>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+
+      <a href="#" class="admin-nav-link active" data-tab="tab-overview">🏠 Dashboard</a>
+
+      <p class="admin-nav-heading">Content Management</p>
+      <a href="#" class="admin-nav-link" data-tab="tab-events">📅 Events</a>
+      <a href="#" class="admin-nav-link" data-tab="tab-heritage">🏛️ Heritage</a>
+      <a href="#" class="admin-nav-link admin-nav-disabled" title="Coming soon">⛰️ Tourism</a>
+      <a href="#" class="admin-nav-link admin-nav-disabled" title="Coming soon">🍽️ Food</a>
+      <a href="#" class="admin-nav-link admin-nav-disabled" title="Coming soon">🎨 Handicrafts</a>
+      <a href="#" class="admin-nav-link admin-nav-disabled" title="Coming soon">🎵 Music &amp; Dance</a>
+      <a href="#" class="admin-nav-link admin-nav-disabled" title="Coming soon">🗣️ Languages</a>
+
+      <p class="admin-nav-heading">Community</p>
+      <a href="#" class="admin-nav-link" data-tab="tab-contributions">📥 Contributions <span class="admin-nav-badge" id="navPendingBadge"></span></a>
+
+      <p class="admin-nav-heading">User Management</p>
+      <a href="#" class="admin-nav-link" data-tab="tab-users">👥 Users</a>
+
+      <p class="admin-nav-heading">Other</p>
+      <a href="#" class="admin-nav-link" data-tab="tab-setup">⚙️ Setup Tools</a>
+
+    </nav>
+
+    <a href="index.html" class="admin-sidebar-viewsite">🌐 View Website</a>
+
+  </aside>
+
+  <div class="admin-main">
+
+    <header class="admin-topbar">
+      <div class="admin-topbar-crumb">Dashboard</div>
+      <div id="adminStatus" class="admin-status"></div>
+      <div class="admin-topbar-profile">👤 Admin</div>
+    </header>
+
+    <div class="admin-content">
+
+      <div id="tab-overview" class="admin-tab-panel">
+
+        <h2 class="admin-content-title">Overview</h2>
+
+        <div class="dashboard-stats" id="adminStats">
+          <div class="stat-card-v2"><span class="stat-icon">👥</span><div><h4 id="statUsersCount">–</h4><p>Total Users</p></div></div>
+          <div class="stat-card-v2"><span class="stat-icon">🎉</span><div><h4 id="statEventsCount">–</h4><p>Events</p></div></div>
+          <div class="stat-card-v2"><span class="stat-icon">🏛️</span><div><h4 id="statHeritageCount">–</h4><p>Heritage Sites</p></div></div>
+          <div class="stat-card-v2"><span class="stat-icon">🕓</span><div><h4 id="statPendingCount">–</h4><p>Pending Contributions</p></div></div>
+          <div class="stat-card-v2"><span class="stat-icon">💬</span><div><h4 id="statCommentsCount">–</h4><p>Comments</p></div></div>
+          <div class="stat-card-v2"><span class="stat-icon">❤️</span><div><h4 id="statFavoritesCount">–</h4><p>Favorites Saved</p></div></div>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Recent Contributions</h3>
+          <div id="recentContributions"><p>Loading...</p></div>
+        </div>
+
+        <h3 class="admin-content-title" style="margin-top:30px;">Content Management</h3>
+
+        <div class="admin-content-grid">
+
+          <div class="admin-content-tile">
+            <span>📅</span>
+            <h4>Events</h4>
+            <p>Manage all cultural events</p>
+            <button class="admin-manage-btn" data-goto="tab-events">Manage →</button>
+          </div>
+
+          <div class="admin-content-tile">
+            <span>🏛️</span>
+            <h4>Heritage</h4>
+            <p>Manage heritage places</p>
+            <button class="admin-manage-btn" data-goto="tab-heritage">Manage →</button>
+          </div>
+
+          <div class="admin-content-tile disabled">
+            <span>⛰️</span>
+            <h4>Tourism</h4>
+            <p>Coming soon</p>
+          </div>
+
+          <div class="admin-content-tile disabled">
+            <span>🍽️</span>
+            <h4>Food</h4>
+            <p>Coming soon</p>
+          </div>
+
+          <div class="admin-content-tile disabled">
+            <span>🎨</span>
+            <h4>Handicrafts</h4>
+            <p>Coming soon</p>
+          </div>
+
+          <div class="admin-content-tile disabled">
+            <span>🎵</span>
+            <h4>Music &amp; Dance</h4>
+            <p>Coming soon</p>
+          </div>
+
+          <div class="admin-content-tile disabled">
+            <span>🗣️</span>
+            <h4>Languages</h4>
+            <p>Coming soon</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="tab-events" class="admin-tab-panel" style="display:none;">
+
+        <div class="admin-tools-box">
+          <h3>Manage Events</h3>
+          <p>Add, edit, or delete events shown on the Events page — no code changes needed.</p>
+          <button id="addEventBtn" class="approve-btn">+ Add Event</button>
+
+          <div id="eventFormBox" class="contribute-form-box" style="display:none; margin-top:16px;">
+            <form id="eventForm">
+              <input type="hidden" id="eventDocId">
+
+              <label>Name</label>
+              <input type="text" id="eventName" required>
+
+              <label>Description</label>
+              <textarea id="eventDescription" rows="3" required></textarea>
+
+              <label>Category</label>
+              <input type="text" id="eventCategory" placeholder="e.g. Sufi Festival, National, Sports" required>
+
+              <label>Date</label>
+              <input type="text" id="eventDate" placeholder="e.g. May 28, 2026" required>
+
+              <label>Venue</label>
+              <input type="text" id="eventVenue" required>
+
+              <label>Region</label>
+              <select id="eventRegion" required>
+                <option value="punjab">Punjab</option>
+                <option value="sindh">Sindh</option>
+                <option value="kpk">KPK</option>
+                <option value="balochistan">Balochistan</option>
+                <option value="gilgit">Gilgit-Baltistan</option>
+              </select>
+
+              <label>Image path</label>
+              <input type="text" id="eventImage" placeholder="images/example.jpg" required>
+
+              <label><input type="checkbox" id="eventFeatured"> Show in Featured Events</label>
+
+              <div style="margin-top:14px; display:flex; gap:10px;">
+                <button type="submit" class="approve-btn">Save</button>
+                <button type="button" id="cancelEventForm" class="reject-btn">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="eventAdminList" class="admin-list" style="margin-top:16px;"></div>
+        </div>
+
+      </div>
+
+      <div id="tab-heritage" class="admin-tab-panel" style="display:none;">
+
+        <div class="admin-tools-box">
+          <h3>Manage Heritage Sites</h3>
+          <p>Add, edit, or delete heritage sites shown on the Heritage page — no code changes needed.</p>
+          <button id="addHeritageBtn" class="approve-btn">+ Add Heritage Site</button>
+
+          <div id="heritageFormBox" class="contribute-form-box" style="display:none; margin-top:16px;">
+            <form id="heritageForm">
+              <input type="hidden" id="heritageDocId">
+
+              <label>Name</label>
+              <input type="text" id="heritageName" required>
+
+              <label>Description</label>
+              <textarea id="heritageDescription" rows="3" required></textarea>
+
+              <label>Image path</label>
+              <input type="text" id="heritageImage" placeholder="images/example.jpg" required>
+
+              <label>City</label>
+              <input type="text" id="heritageCity" required>
+
+              <label>Province</label>
+              <select id="heritageProvince" required>
+                <option value="Punjab">Punjab</option>
+                <option value="Sindh">Sindh</option>
+                <option value="KPK">KPK</option>
+                <option value="Balochistan">Balochistan</option>
+                <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+              </select>
+
+              <label>Category</label>
+              <input type="text" id="heritageCategory" placeholder="e.g. Mosque, Fort, Archaeological Site">
+
+              <label>Built Year</label>
+              <input type="text" id="heritageBuiltYear" placeholder="e.g. 1673">
+
+              <label>Architectural Style</label>
+              <input type="text" id="heritageStyle" placeholder="e.g. Mughal Architecture">
+
+              <label>History</label>
+              <textarea id="heritageHistory" rows="3"></textarea>
+
+              <label>Significance</label>
+              <textarea id="heritageSignificance" rows="2"></textarea>
+
+              <label>Opening Hours</label>
+              <input type="text" id="heritageHours" placeholder="e.g. 9 AM - 6 PM">
+
+              <label>Best Time to Visit</label>
+              <input type="text" id="heritageBestTime" placeholder="e.g. October to March">
+
+              <label>Fun Fact</label>
+              <textarea id="heritageFunFact" rows="2"></textarea>
+
+              <div style="margin-top:14px; display:flex; gap:10px;">
+                <button type="submit" class="approve-btn">Save</button>
+                <button type="button" id="cancelHeritageForm" class="reject-btn">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="heritageAdminList" class="admin-list" style="margin-top:16px;"></div>
+        </div>
+
+      </div>
+
+      <div id="tab-contributions" class="admin-tab-panel" style="display:none;">
+        <div id="adminList" class="admin-list"></div>
+      </div>
+
+      <div id="tab-users" class="admin-tab-panel" style="display:none;">
+
+        <div class="admin-tools-box">
+          <h3>Users</h3>
+          <p>Ban or unban accounts — takes effect the next time that user logs in.</p>
+          <div id="usersAdminList" class="admin-list" style="margin-top:16px;"></div>
+        </div>
+
+      </div>
+
+      <div id="tab-setup" class="admin-tab-panel" style="display:none;">
+
+        <div class="admin-tools-box">
+          <h3>Cultural Map — Region Data</h3>
+          <p>One-time setup: creates the 5 province/region documents used by the Cultural Map page. Safe to click again — it just overwrites with the same defaults.</p>
+          <button id="seedRegionsBtn" class="approve-btn">Seed Region Data</button>
+          <span id="seedRegionsStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Festivals & Events</h3>
+          <p>One-time setup: creates the 15 event documents used by the Events page. Safe to click again — it just overwrites with the same defaults.</p>
+          <button id="seedEventsBtn" class="approve-btn">Seed Events</button>
+          <span id="seedEventsStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Tourism — Destinations</h3>
+          <p>One-time setup: creates the 30 destination documents used by the Tourism page, the destination detail pages and the AI Trip Planner. Safe to click again — it just overwrites with the same defaults.</p>
+          <button id="seedTourismBtn" class="approve-btn">Seed Tourism</button>
+          <span id="seedTourismStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Culture — Places &amp; Traditions</h3>
+          <p>Creates the "Culture of …" content shown on tourism destination pages (food, weddings, dress, language, festivals, crafts, etiquette). <b>Seed Culture</b> only adds areas that do not exist yet. <b>Replace all</b> overwrites everything with the text in the code.</p>
+          <button id="seedCultureBtn" class="approve-btn">Seed Culture</button>
+          <button id="reseedCultureBtn" class="approve-btn">Replace all</button>
+          <span id="seedCultureStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Languages — Learning Content</h3>
+          <p>Adds the expanded "Learn This Language" vocabulary data (greetings, numbers up to 20, common words across 6 categories, phrases) to all 12 language documents in the languages collection. Safe to click again — only updates the language_learning field, existing language info is untouched.</p>
+          <button id="seedLanguagesBtn" class="approve-btn">Seed Languages</button>
+          <span id="seedLanguagesStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Languages — Language Family</h3>
+          <p>Adds the "Language Family" quick-fact (e.g. Indo-European &gt; Indo-Iranian &gt; Indo-Aryan) to all 12 language documents in the languages collection, replacing the "Coming Soon" placeholder on each language detail page. Safe to click again — only updates the language_family field, existing language info is untouched.</p>
+          <button id="seedLanguageFamilyBtn" class="approve-btn">Seed Language Family</button>
+          <span id="seedLanguageFamilyStatus"></span>
+        </div>
+
+        <div class="admin-tools-box">
+          <h3>Heritage — Fix Missing Detail Content</h3>
+          <p>Fills in the Historical Background, Cultural Significance, Opening Hours, Best Time To Visit and Did You Know fields for every heritage site that is missing them, using accurate content for well-known sites and a sensible fallback for others. Safe to click again — it only fills fields that are currently empty, existing content is never overwritten.</p>
+          <button id="seedHeritageContentBtn" class="approve-btn">Fix Heritage Content</button>
+          <span id="seedHeritageContentStatus"></span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer class="admin-footer">
+      © 2026 UniCulture — Cultural Preservation Project Pakistan
+    </footer>
+
+  </div>
+
+</div>
+
+
+<script>
+  function activateTab(tabId) {
+    document.querySelectorAll(".admin-nav-link").forEach((l) => l.classList.remove("active"));
+    document.querySelectorAll(".admin-tab-panel").forEach((p) => p.style.display = "none");
+    const link = document.querySelector(`.admin-nav-link[data-tab="${tabId}"]`);
+    if (link) link.classList.add("active");
+    const panel = document.getElementById(tabId);
+    if (panel) panel.style.display = "block";
+    document.querySelector(".admin-topbar-crumb").textContent =
+      link ? link.textContent.replace(/^\S+\s/, "").trim() : "Dashboard";
+  }
+
+  document.querySelectorAll(".admin-nav-link[data-tab]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateTab(link.dataset.tab);
+    });
+  });
+
+  document.querySelectorAll(".admin-manage-btn").forEach((btn) => {
+    btn.addEventListener("click", () => activateTab(btn.dataset.goto));
+  });
+</script>
+
+<script type="module" src="admin.js"></script>
+
+<script type="module" src="admin-events.js"></script>
+
+<script type="module" src="admin-heritage.js"></script>
+
+<script type="module" src="admin-users.js"></script>
+
+<script type="module" src="seed-regions.js"></script>
+
+<script type="module" src="seed-events.js"></script>
+
+<script type="module" src="seed-tourism.js"></script>
+
+<script type="module" src="seed-culture.js"></script>
+
+<script type="module" src="seed-languages.js"></script>
+
+<script type="module" src="seed-language-family.js"></script>
+
+<script type="module" src="seed-heritage-content.js"></script>
+
+</body>
+
+</html>

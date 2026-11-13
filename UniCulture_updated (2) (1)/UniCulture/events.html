@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Events — UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+  <div class="brand">
+
+    <img src="images/logo1.png" class="logo">
+
+    <div>
+      <span class="uni">Uni</span><span class="culture">Culture</span><br>
+      <small class="tagline">Bringing Cultures Together</small>
+    </div>
+
+  </div>
+
+  <nav class="nav-links">
+
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html" class="active">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+
+  <span id="auth-area"></span>
+
+</header>
+
+<!-- LOGIN CHECK -->
+<script type="module">
+
+import { auth }
+from "./firebase-config.js";
+
+import {
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+const authArea =
+document.getElementById("auth-area");
+
+onAuthStateChanged(auth, (user)=>{
+
+if(user){
+
+const name =
+user.displayName || user.email;
+
+const initial =
+name.charAt(0).toUpperCase();
+
+authArea.innerHTML = `
+
+<div class="profile-menu">
+
+<div class="profile-circle" id="profileBtn">
+${initial}
+</div>
+
+<div id="dropdown-menu" class="dropdown-menu">
+
+<p>${name}</p>
+
+<a href="#" id="logoutBtn">
+Logout
+</a>
+
+</div>
+
+</div>
+
+`;
+
+document
+.getElementById("profileBtn")
+.addEventListener("click", ()=>{
+
+document
+.getElementById("dropdown-menu")
+.classList.toggle("show");
+
+});
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async ()=>{
+
+await signOut(auth);
+
+window.location.href =
+"auth.html";
+
+});
+
+}
+
+else{
+
+authArea.innerHTML = `
+<a href="auth.html" class="login-btn">
+Login
+</a>
+`;
+
+}
+
+});
+
+</script>
+<!-- HERO -->
+
+<section class="about-hero">
+
+  <div class="about-overlay">
+
+    <h1>Festivals & Events</h1>
+
+    <p>
+      Experience Pakistan’s vibrant cultural celebrations across all regions.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- FILTER -->
+
+<section class="events-filter">
+
+  <div class="filter-bar">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search events..."
+      class="search-box"
+    >
+
+    <select id="categoryFilter" class="category-dropdown">
+
+      <option value="All">All Types</option>
+
+      <option value="Sports">Sports</option>
+
+      <option value="Cultural Fair">Cultural Fair</option>
+
+      <option value="Religious Festival">Religious Festival</option>
+
+      <option value="National">National</option>
+
+      <option value="Sufi Festival">Sufi Festival</option>
+
+    </select>
+
+  </div>
+
+</section>
+
+<!-- FEATURED EVENTS -->
+
+<section class="events-section">
+
+  <h2 class="events-title">
+    Featured Events
+  </h2>
+
+  <div class="events-grid featured-grid" id="featuredEvents"></div>
+
+</section>
+
+<!-- ALL EVENTS -->
+
+<section class="all-events">
+
+  <h2 class="events-title">
+    All Events
+  </h2>
+
+  <div class="events-grid" id="allEvents"></div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<!-- LOGIN / SIGNUP POPUP -->
+
+<div class="popup-overlay" id="authPopup">
+
+  <div class="popup-container">
+
+    <!-- LEFT IMAGE -->
+
+    <div class="popup-left">
+      <img src="images/login image.png">
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="popup-right">
+
+      <!-- CLOSE BUTTON -->
+
+      <span class="close-btn" id="closePopup">
+        &times;
+      </span>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button class="tab" id="signupTab">
+          Signup
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Login
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm" style="display:none;">
+
+        <div class="input-group">
+          <input type="text"
+          placeholder="Full Name"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Create Account
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="events.js"></script>
+
+</body>
+</html>

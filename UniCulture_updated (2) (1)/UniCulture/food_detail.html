@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Food Detail | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",Arial,sans-serif;
+background:#faf7f1;
+color:#333;
+}
+
+/* ================= HERO ================= */
+
+.food-hero{
+position:relative;
+min-height:460px;
+display:flex;
+align-items:flex-end;
+background:#2d5a27;
+background-size:cover;
+background-position:center;
+}
+
+.food-hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(20,20,15,.35) 0%,rgba(15,15,10,.55) 55%,rgba(10,10,8,.92) 100%);
+}
+
+.food-hero-inner{
+position:relative;
+z-index:2;
+max-width:1200px;
+width:100%;
+margin:0 auto;
+padding:60px 25px 120px;
+}
+
+.food-breadcrumb{
+font-size:14px;
+color:rgba(255,255,255,.75);
+margin-bottom:18px;
+}
+
+.food-breadcrumb a{
+color:rgba(255,255,255,.85);
+text-decoration:none;
+}
+
+.food-breadcrumb a:hover{
+text-decoration:underline;
+}
+
+.hero-badge-row{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:18px;
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(4px);
+border:1px solid rgba(255,255,255,.35);
+color:#fff;
+padding:7px 16px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+letter-spacing:.3px;
+}
+
+.food-hero h1{
+font-family:"Cormorant Garamond",Georgia,serif;
+color:#fff;
+font-size:56px;
+font-weight:700;
+margin:0 0 12px;
+line-height:1.05;
+}
+
+.food-hero-tagline{
+color:rgba(255,255,255,.88);
+font-size:18px;
+max-width:640px;
+line-height:1.6;
+margin:0;
+}
+
+/* ================= LAYOUT ================= */
+
+.food-container{
+max-width:1200px;
+margin:-60px auto 80px;
+padding:0 25px;
+position:relative;
+z-index:3;
+}
+
+/* QUICK FACTS STRIP */
+
+.quick-facts{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:40px;
+}
+
+.fact-card{
+background:#fff;
+border-radius:18px;
+padding:22px 20px;
+text-align:center;
+box-shadow:0 15px 35px rgba(0,0,0,.10);
+border-bottom:4px solid #c1622c;
+}
+
+.fact-icon{
+font-size:30px;
+margin-bottom:8px;
+}
+
+.fact-card h4{
+color:#2d5a27;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:.6px;
+margin-bottom:6px;
+}
+
+.fact-card p{
+line-height:1.5;
+font-size:15.5px;
+color:#444;
+font-weight:600;
+}
+
+/* MAIN GRID: article + sidebar */
+
+.food-main-grid{
+display:grid;
+grid-template-columns:1.7fr 1fr;
+gap:30px;
+align-items:start;
+}
+
+.food-article{
+background:#fff;
+padding:42px;
+border-radius:22px;
+box-shadow:0 15px 40px rgba(0,0,0,.07);
+}
+
+.section-title h2{
+font-family:"Cormorant Garamond",Georgia,serif;
+font-size:32px;
+color:#2d5a27;
+margin-bottom:6px;
+}
+
+.section-title p{
+font-size:16px;
+color:#777;
+margin-bottom:10px;
+}
+
+.content-text{
+font-size:16.5px;
+line-height:1.9;
+color:#3d3d3d;
+}
+
+.content-section{
+margin-top:42px;
+padding-top:32px;
+border-top:1px dashed #e4ddce;
+}
+
+.content-section:first-of-type{
+margin-top:30px;
+padding-top:0;
+border-top:none;
+}
+
+.section-header{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:24px;
+color:#2d5a27;
+margin-bottom:14px;
+font-family:"Cormorant Garamond",Georgia,serif;
+font-weight:700;
+}
+
+.section-header .emoji{
+font-size:22px;
+}
+
+.back-btn{
+display:inline-block;
+margin-top:40px;
+background:#2d5a27;
+color:white;
+padding:13px 26px;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+transition:.25s;
+}
+
+.back-btn:hover{
+background:#204019;
+}
+
+/* ================= SIDEBAR ================= */
+
+.food-sidebar{
+position:sticky;
+top:100px;
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.side-card{
+background:#fff;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+overflow:hidden;
+}
+
+/* RECIPE VIDEO CARD */
+
+.recipe-card-head{
+padding:20px 22px 12px;
+}
+
+.recipe-card-head h3{
+font-family:"Cormorant Garamond",Georgia,serif;
+font-size:22px;
+color:#2d5a27;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.recipe-card-head p{
+font-size:14px;
+color:#888;
+margin-top:4px;
+}
+
+.video-embed-wrap{
+position:relative;
+width:100%;
+padding-top:56.25%;
+background:#111;
+}
+
+.video-embed-wrap iframe{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+border:0;
+}
+
+.video-fallback{
+margin:0 22px 22px;
+background:#fbf1e8;
+border:1px dashed #c1622c;
+border-radius:14px;
+padding:22px;
+text-align:center;
+}
+
+.video-fallback .fv-icon{
+font-size:32px;
+margin-bottom:8px;
+}
+
+.video-fallback p{
+font-size:14px;
+color:#6b5a4a;
+margin-bottom:14px;
+line-height:1.5;
+}
+
+.watch-btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#c1622c;
+color:#fff;
+text-decoration:none;
+padding:12px 20px;
+border-radius:30px;
+font-weight:700;
+font-size:14px;
+transition:.25s;
+}
+
+.watch-btn:hover{
+background:#a24f22;
+}
+
+.video-caption{
+padding:16px 22px 22px;
+font-size:13.5px;
+color:#888;
+}
+
+.video-caption a{
+color:#c1622c;
+font-weight:600;
+text-decoration:none;
+}
+
+.video-caption a:hover{
+text-decoration:underline;
+}
+
+/* POPULAR PLACES */
+
+.funfact-card{
+padding:26px 24px;
+display:flex;
+gap:16px;
+}
+
+.fun-icon{
+font-size:32px;
+flex-shrink:0;
+}
+
+.funfact-card h3{
+font-size:17px;
+color:#2d5a27;
+margin-bottom:6px;
+}
+
+.funfact-card p{
+font-size:14.5px;
+line-height:1.65;
+color:#555;
+}
+
+/* ================= AI RECIPE GENERATOR ================= */
+
+.recipe-gen-card{
+margin-top:30px;
+background:linear-gradient(135deg,#fff 0%,#fdf8f0 100%);
+border:1px solid #f0e4d3;
+border-radius:22px;
+box-shadow:0 15px 40px rgba(0,0,0,.07);
+padding:36px 42px;
+}
+
+.recipe-gen-head{
+display:flex;
+gap:18px;
+align-items:flex-start;
+margin-bottom:22px;
+}
+
+.recipe-gen-icon{
+flex-shrink:0;
+width:56px;
+height:56px;
+border-radius:50%;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.recipe-gen-icon img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.recipe-gen-head h2{
+font-family:"Cormorant Garamond",Georgia,serif;
+font-size:28px;
+color:#2d5a27;
+margin-bottom:6px;
+}
+
+.recipe-gen-head p{
+font-size:15px;
+color:#666;
+line-height:1.6;
+max-width:640px;
+}
+
+.recipe-gen-body textarea{
+width:100%;
+min-height:90px;
+resize:vertical;
+border:1.5px solid #e4ddce;
+border-radius:14px;
+padding:16px 18px;
+font-family:inherit;
+font-size:15px;
+color:#333;
+background:#fff;
+outline:none;
+transition:.2s;
+}
+
+.recipe-gen-body textarea:focus{
+border-color:#c1622c;
+box-shadow:0 0 0 3px rgba(193,98,44,.12);
+}
+
+.generate-btn{
+margin-top:16px;
+border:none;
+cursor:pointer;
+font-size:15px;
+}
+
+.generate-btn:disabled{
+opacity:.65;
+cursor:not-allowed;
+}
+
+#recipeGenResult{
+margin-top:24px;
+}
+
+.recipe-gen-loading{
+display:flex;
+align-items:center;
+gap:12px;
+color:#a24f22;
+font-weight:600;
+font-size:14.5px;
+}
+
+.recipe-gen-spinner{
+width:18px;
+height:18px;
+border:3px solid #f0d8c4;
+border-top-color:#c1622c;
+border-radius:50%;
+animation:rg-spin .8s linear infinite;
+}
+
+@keyframes rg-spin{
+to{transform:rotate(360deg);}
+}
+
+.recipe-gen-error{
+background:#fdecea;
+border:1px solid #f3c6c0;
+color:#a33;
+padding:14px 18px;
+border-radius:12px;
+font-size:14.5px;
+}
+
+.recipe-gen-output{
+background:#fff;
+border:1px solid #f0e4d3;
+border-left:5px solid #c1622c;
+border-radius:14px;
+padding:24px 26px;
+font-size:15.5px;
+line-height:1.85;
+color:#3d3d3d;
+white-space:normal;
+}
+
+.recipe-gen-output p{
+margin-bottom:12px;
+}
+
+.recipe-gen-output p:last-child{
+margin-bottom:0;
+}
+
+.recipe-gen-output strong{
+color:#2d5a27;
+}
+
+.recipe-gen-note{
+margin-top:10px;
+font-size:12.5px;
+color:#999;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:980px){
+
+.food-main-grid{
+grid-template-columns:1fr;
+}
+
+.food-sidebar{
+position:static;
+}
+
+}
+
+@media(max-width:900px){
+
+.quick-facts{
+grid-template-columns:repeat(2,1fr);
+}
+
+.food-hero h1{
+font-size:42px;
+}
+
+}
+
+@media(max-width:600px){
+
+.quick-facts{
+grid-template-columns:1fr;
+}
+
+.food-hero h1{
+font-size:34px;
+}
+
+.food-article{
+padding:26px;
+}
+
+.food-container{
+margin-top:-40px;
+}
+
+.recipe-gen-card{
+padding:24px;
+}
+
+.recipe-gen-head{
+flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+<script src="theme.js"></script>
+
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo">
+
+<div>
+<span class="uni">Uni</span>
+<span class="culture">Culture</span><br>
+<small class="tagline">
+Bringing Cultures Together
+</small>
+</div>
+
+</div>
+
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+<a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+</nav>
+
+
+<span id="auth-area"></span>
+
+
+</header>
+
+
+
+
+<!-- HERO -->
+
+<section class="food-hero" id="hero">
+
+<div class="food-hero-inner">
+
+<div class="food-breadcrumb">
+<a href="index.html">Home</a> &nbsp;/&nbsp; <a href="food.html">Traditional Food</a> &nbsp;/&nbsp; <span id="breadcrumbName">Dish</span>
+</div>
+
+<div class="hero-badge-row">
+<span class="hero-badge">🍽️ Traditional Cuisine of Pakistan</span>
+<span class="hero-badge" id="regionBadge">📍 Region</span>
+</div>
+
+<h1 id="name"></h1>
+
+<p class="food-hero-tagline">
+Experience the authentic flavors and culinary heritage of Pakistan.</p>
+
+</div>
+
+</section>
+
+
+<section class="food-container">
+
+<!-- QUICK FACTS -->
+
+<div class="quick-facts">
+
+<div class="fact-card">
+<div class="fact-icon">📍</div>
+<h4>Region</h4>
+<p id="region2"></p>
+</div>
+
+<div class="fact-card">
+<div class="fact-icon">🌍</div>
+<h4>Origin</h4>
+<p id="origin"></p>
+</div>
+
+<div class="fact-card">
+<div class="fact-icon">🥘</div>
+<h4>Ingredients</h4>
+<p id="features"></p>
+</div>
+
+<div class="fact-card">
+<div class="fact-icon">😋</div>
+<h4>Taste</h4>
+<p id="type"></p>
+</div>
+
+</div>
+
+
+<div class="food-main-grid">
+
+<!-- MAIN ARTICLE -->
+
+<div class="food-article">
+
+<div class="section-title">
+<h2>Overview</h2>
+</div>
+
+<p id="description" class="content-text"></p>
+
+<div class="content-section">
+<h2 class="section-header"><span class="emoji">👩‍🍳</span> Preparation Method</h2>
+<p id="history" class="content-text"></p>
+</div>
+
+<div class="content-section">
+<h2 class="section-header"><span class="emoji">🏛️</span> Cultural Importance</h2>
+<p id="significance" class="content-text"></p>
+</div>
+
+<div class="content-section">
+<h2 class="section-header"><span class="emoji">🎉</span> Occasions</h2>
+<p id="activities" class="content-text"></p>
+</div>
+
+<a href="food.html" class="back-btn">
+← Back to Food
+</a>
+
+</div>
+
+
+<!-- SIDEBAR -->
+
+<div class="food-sidebar">
+
+<!-- RECIPE VIDEO CARD -->
+
+<div class="side-card" id="recipeCard">
+
+<div class="recipe-card-head">
+<h3>▶️ Watch the Recipe</h3>
+<p>Learn how to make this dish at home</p>
+</div>
+
+<div id="videoArea"></div>
+
+</div>
+
+<!-- POPULAR PLACES -->
+
+<div class="side-card funfact-card">
+<div class="fun-icon">💡</div>
+<div>
+<h3>Popular Places</h3>
+<p id="funfact"></p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- AI RECIPE GENERATOR -->
+
+<div class="recipe-gen-card" id="recipeGenCard">
+
+<div class="recipe-gen-head">
+<div class="recipe-gen-icon">
+<img src="images/ai-assistant-icon.png" alt="UniCulture AI Assistant">
+</div>
+<div>
+<h2>Universal Recipe Generator</h2>
+<p>Tell us which ingredients you already have at home — AI will figure out which traditional Pakistani dish you can make with them and generate the full recipe.</p>
+</div>
+</div>
+
+<div class="recipe-gen-body">
+
+<textarea id="ingredientsInput" placeholder="List the ingredients you have, separated by commas — e.g. chicken, onion, tomato, yogurt, rice..."></textarea>
+
+<button type="button" id="generateRecipeBtn" class="watch-btn generate-btn">
+✨ Generate Recipe
+</button>
+
+<div id="recipeGenResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="food_detail.js"></script>
+</body>
+
+</html>

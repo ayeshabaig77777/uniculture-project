@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Event Details | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7f2;
+color:#333;
+}
+
+/* HERO */
+
+.ed-hero{
+  background: linear-gradient(135deg, #265430);
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.ed-hero-overlay{
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.ed-hero-left{
+  color: white;
+  max-width: 640px;
+}
+
+.ed-badge{
+  display: inline-block;
+  background: #5b8c45;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.ed-hero-left h1{
+  font-size: 42px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+
+.ed-hero-venue{
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* TICKET-STYLE DATE BADGE */
+
+.ed-ticket{
+  width: 150px;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+  padding: 18px 10px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0,0,0,.25);
+  flex-shrink: 0;
+}
+
+.ed-ticket::before,
+.ed-ticket::after{
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #f5f7f2;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ed-ticket::before{ left: -10px; }
+.ed-ticket::after{ right: -10px; }
+
+.ed-ticket-month{
+  color: #d9534f;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.ed-ticket-day{
+  font-size: 46px;
+  font-weight: 800;
+  color: #265430;
+  line-height: 1;
+  margin: 6px 0;
+}
+
+.ed-ticket-year{
+  font-size: 13px;
+  color: #888;
+}
+
+/* MAIN CARD */
+
+.ed-container{
+  max-width: 1000px;
+  margin: 40px auto 60px;
+  padding: 0 25px;
+}
+
+.ed-card{
+  background: white;
+  padding: 45px;
+  border-radius: 25px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.08);
+}
+
+/* COUNTDOWN */
+
+.ed-countdown-title{
+  text-align: center;
+  color: #265430;
+  font-size: 18px;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.ed-countdown{
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.ed-count-box{
+  background: #eef7e8;
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 80px;
+}
+
+.ed-count-box span{
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  color: #265430;
+}
+
+.ed-count-box small{
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.ed-concluded{
+  text-align: center;
+  background: #f5f0e6;
+  color: #8a6d3b;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+/* SECTIONS */
+
+.ed-section-header{
+  font-size: 24px;
+  color: #265430;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #dfe8d9;
+}
+
+.ed-content-text{
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 40px;
+  text-align: justify;
+}
+
+/* QUICK FACTS */
+
+.ed-quick-facts{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+.ed-fact-card{
+  background: #fff;
+  border: 1px solid #edf1ea;
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,.05);
+}
+
+.ed-fact-icon{
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.ed-fact-card h4{
+  margin: 6px 0;
+  font-size: 15px;
+  color: #265430;
+}
+
+.ed-fact-card p{
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/* BACK BUTTON */
+
+.ed-back-btn{
+  display: inline-block;
+  margin-top: 40px;
+  padding: 14px 28px;
+  background: #265430;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: .3s;
+}
+
+.ed-back-btn:hover{
+  background: #1e4426;
+}
+
+.ed-hero-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ed-share-btn{
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: .25s;
+}
+
+.ed-share-btn:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+.ed-hero-actions .fav-btn{
+  position: static;
+  background: rgba(255,255,255,0.15);
+  box-shadow: none;
+}
+
+.ed-hero-actions .fav-btn:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+/* ABOUT + HIGHLIGHTS BOX */
+
+.ed-about-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 30px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+
+.ed-about-grid .ed-content-text{
+  margin-bottom: 0;
+}
+
+.ed-highlights-box{
+  background: #fff;
+  border: 1px solid #edf1ea;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+.ed-highlight-item{
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ed-highlight-item:nth-child(n+3){
+  padding-top: 18px;
+  border-top: 1px solid #edf1ea;
+}
+
+.ed-highlight-icon{
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ed-highlight-item h4{
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #265430;
+}
+
+.ed-highlight-item p{
+  margin: 0;
+  font-size: 12.5px;
+  color: #666;
+  line-height: 1.5;
+}
+
+@media(max-width:800px){
+  .ed-about-grid{ grid-template-columns: 1fr; }
+}
+
+/* CULTURAL HIGHLIGHTS */
+
+.ed-culture-row{
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.ed-culture-item{
+  flex: 1;
+  min-width: 150px;
+}
+
+.ed-culture-icon{
+  font-size: 22px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.ed-culture-item h4{
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #265430;
+}
+
+.ed-culture-item p{
+  margin: 0;
+  font-size: 12.5px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* TOAST */
+
+.ed-toast{
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #265430;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+  z-index: 999;
+}
+
+.ed-toast.show{
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media(max-width:800px){
+  .ed-hero-overlay{
+    flex-direction: column;
+    text-align: center;
+  }
+  .ed-hero-left h1{ font-size: 30px; }
+  .ed-card{ padding: 26px; }
+}
+
+</style>
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+
+  <div class="brand">
+    <img src="images/logo1.png" class="logo" alt="UniCulture Logo">
+    <div>
+      <span class="uni">Uni</span><span class="culture">Culture</span><br>
+      <small class="tagline">Bringing Cultures Together</small>
+    </div>
+  </div>
+
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+    <a href="community.html">Community</a>
+  </nav>
+
+  <span id="auth-area"></span>
+
+</header>
+
+<!-- HERO -->
+
+<section class="ed-hero">
+
+  <div class="ed-hero-overlay">
+
+    <div class="ed-hero-left">
+      <div class="ed-badge" id="eventCategory">Event</div>
+      <h1 id="eventName">Loading...</h1>
+      <div class="ed-hero-venue">📍 <span id="eventVenue"></span></div>
+
+      <div class="ed-hero-actions">
+        
+        <span id="favSlot"></span>
+      </div>
+
+    </div>
+
+    <div class="ed-ticket">
+      <div class="ed-ticket-month" id="ticketMonth">—</div>
+      <div class="ed-ticket-day" id="ticketDay">—</div>
+      <div class="ed-ticket-year" id="ticketYear">—</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MAIN -->
+
+<section class="ed-container">
+
+  <div class="ed-card">
+
+    <!-- COUNTDOWN (shown only for upcoming events) -->
+
+    <div id="countdownWrap">
+
+      <div class="ed-countdown-title">Event Starts In</div>
+
+      <div class="ed-countdown">
+
+        <div class="ed-count-box">
+          <span id="cdDays">0</span>
+          <small>Days</small>
+        </div>
+
+        <div class="ed-count-box">
+          <span id="cdHours">0</span>
+          <small>Hours</small>
+        </div>
+
+        <div class="ed-count-box">
+          <span id="cdMinutes">0</span>
+          <small>Minutes</small>
+        </div>
+
+        <div class="ed-count-box">
+          <span id="cdSeconds">0</span>
+          <small>Seconds</small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ed-concluded" id="concludedMsg" style="display:none;">
+      🎉 This event has already taken place.
+    </div>
+
+    <h2 class="ed-section-header">Quick Facts</h2>
+
+    <div class="ed-quick-facts">
+
+      <div class="ed-fact-card">
+        <div class="ed-fact-icon">📅</div>
+        <h4>Date</h4>
+        <p id="factDate"></p>
+      </div>
+
+      <div class="ed-fact-card">
+        <div class="ed-fact-icon">📍</div>
+        <h4>Venue</h4>
+        <p id="factVenue"></p>
+      </div>
+
+      <div class="ed-fact-card">
+        <div class="ed-fact-icon">🏷️</div>
+        <h4>Category</h4>
+        <p id="factCategory"></p>
+      </div>
+
+      <div class="ed-fact-card">
+        <div class="ed-fact-icon">🗺️</div>
+        <h4>Region</h4>
+        <p id="factRegion"></p>
+      </div>
+
+    </div>
+
+    <h2 class="ed-section-header">About This Event</h2>
+
+    <div class="ed-about-grid">
+      <p class="ed-content-text" id="eventDescription"></p>
+      <div class="ed-highlights-box" id="highlightsBox" style="display:none;"></div>
+    </div>
+
+    <div id="cultureWrap" style="display:none;">
+      <h2 class="ed-section-header">Cultural Highlights</h2>
+      <div class="ed-culture-row" id="cultureRow"></div>
+    </div>
+
+    <a href="events.html" class="ed-back-btn">← Back to Events</a>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<div class="ed-toast" id="edToast">Link copied!</div>
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module" src="event_detail.js"></script>
+
+</body>
+</html>

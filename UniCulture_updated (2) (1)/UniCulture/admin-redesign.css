@@ -1,0 +1,431 @@
+/* =========================================================
+   UniCulture Admin — Contributions & Users redesign
+   All classes start with "ad-" so they do not clash with the old style.css.
+   ========================================================= */
+
+:root {
+  --ad-green: #1e4d2f;
+  --ad-green-soft: #e6f0e8;
+  --ad-gold: #d4a72c;
+  --ad-ink: #1c2b21;
+  --ad-muted: #6b7a70;
+  --ad-line: #e1e8e2;
+  --ad-card: #ffffff;
+  --ad-bg: #f3f6f3;
+  --ad-pending-bg: #fdf3d6;
+  --ad-pending-ink: #8a6500;
+  --ad-approved-bg: #dff1e3;
+  --ad-approved-ink: #1d6b36;
+  --ad-rejected-bg: #fbe2e2;
+  --ad-rejected-ink: #a02626;
+}
+
+.ad-page {
+  max-width: 1080px;
+}
+
+.ad-head h2 {
+  margin: 0 0 4px;
+  font-size: 26px;
+  color: var(--ad-green);
+}
+
+.ad-head p {
+  margin: 0 0 22px;
+  color: var(--ad-muted);
+  font-size: 15px;
+}
+
+/* ---------- Stat cards ---------- */
+
+.ad-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.ad-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--ad-card);
+  border: 1px solid var(--ad-line);
+}
+
+.ad-stat-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: var(--ad-green-soft);
+}
+
+.ad-stat strong {
+  display: block;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--ad-ink);
+}
+
+.ad-stat span {
+  font-size: 13px;
+  color: var(--ad-muted);
+}
+
+.ad-stat.is-pending .ad-stat-dot { background: var(--ad-pending-bg); }
+.ad-stat.is-approved .ad-stat-dot { background: var(--ad-approved-bg); }
+.ad-stat.is-rejected .ad-stat-dot,
+.ad-stat.is-banned .ad-stat-dot { background: var(--ad-rejected-bg); }
+
+/* ---------- Toolbar ---------- */
+
+.ad-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.ad-search {
+  flex: 1 1 260px;
+  min-width: 200px;
+  padding: 11px 14px;
+  border: 1px solid var(--ad-line);
+  border-radius: 10px;
+  background: var(--ad-card);
+  color: var(--ad-ink);
+  font-size: 15px;
+}
+
+.ad-search:focus,
+.ad-select:focus {
+  outline: 2px solid var(--ad-gold);
+  outline-offset: 1px;
+}
+
+.ad-select {
+  padding: 11px 14px;
+  border: 1px solid var(--ad-line);
+  border-radius: 10px;
+  background: var(--ad-card);
+  color: var(--ad-ink);
+  font-size: 15px;
+}
+
+.ad-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ad-chip {
+  padding: 9px 16px;
+  border: 1px solid var(--ad-line);
+  border-radius: 999px;
+  background: var(--ad-card);
+  color: var(--ad-ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ad-chip:hover {
+  border-color: var(--ad-green);
+}
+
+.ad-chip.is-active {
+  background: var(--ad-green);
+  border-color: var(--ad-green);
+  color: #fff;
+}
+
+/* ---------- Contribution cards ---------- */
+
+.ad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ad-card {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 18px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--ad-card);
+  border: 1px solid var(--ad-line);
+}
+
+.ad-thumb {
+  width: 170px;
+  height: 130px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ad-green-soft);
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+}
+
+.ad-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ad-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ad-card-top h3 {
+  margin: 0;
+  font-size: 19px;
+  color: var(--ad-ink);
+  overflow-wrap: anywhere;
+}
+
+.ad-badge {
+  flex-shrink: 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.ad-badge.pending { background: var(--ad-pending-bg); color: var(--ad-pending-ink); }
+.ad-badge.approved { background: var(--ad-approved-bg); color: var(--ad-approved-ink); }
+.ad-badge.rejected { background: var(--ad-rejected-bg); color: var(--ad-rejected-ink); }
+
+.ad-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 8px;
+}
+
+.ad-tag {
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: var(--ad-bg);
+  color: var(--ad-muted);
+  font-size: 13px;
+}
+
+.ad-desc {
+  margin: 0 0 10px;
+  color: var(--ad-ink);
+  font-size: 15px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.ad-meta {
+  font-size: 13px;
+  color: var(--ad-muted);
+  overflow-wrap: anywhere;
+}
+
+.ad-meta a {
+  color: var(--ad-green);
+  font-weight: 600;
+}
+
+.ad-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.ad-btn {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+}
+
+.ad-btn:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.ad-btn.approve { background: var(--ad-green); }
+.ad-btn.reject { background: #a02626; }
+.ad-btn.ghost {
+  background: transparent;
+  color: var(--ad-ink);
+  border: 1px solid var(--ad-line);
+}
+
+/* ---------- Empty state ---------- */
+
+.ad-empty {
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px dashed var(--ad-line);
+  border-radius: 14px;
+  color: var(--ad-muted);
+  background: var(--ad-card);
+}
+
+/* ---------- Users table ---------- */
+
+.ad-table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid var(--ad-line);
+  background: var(--ad-card);
+}
+
+.ad-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.ad-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ad-muted);
+  background: var(--ad-bg);
+  border-bottom: 1px solid var(--ad-line);
+}
+
+.ad-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--ad-line);
+  color: var(--ad-ink);
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.ad-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.ad-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.ad-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ad-green);
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ad-avatar.is-banned {
+  background: #8d8d8d;
+}
+
+.ad-muted {
+  color: var(--ad-muted);
+}
+
+.ad-you {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--ad-gold);
+  color: #3b2d00;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ad-more {
+  display: block;
+  margin: 16px auto 0;
+}
+
+/* ---------- Neutralise the old wrapper ---------- */
+
+#tab-users .admin-tools-box {
+  background: none;
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+}
+
+#tab-users .admin-tools-box > h3,
+#tab-users .admin-tools-box > p {
+  display: none;
+}
+
+#tab-users #usersAdminList {
+  margin-top: 0 !important;
+}
+
+/* ---------- Dark mode ---------- */
+
+body.dark-mode {
+  --ad-ink: #e8efe9;
+  --ad-muted: #9fb0a4;
+  --ad-line: #2f4034;
+  --ad-card: #1a261e;
+  --ad-bg: #223127;
+  --ad-green-soft: #24392b;
+  --ad-pending-bg: #43380f;
+  --ad-pending-ink: #f3d476;
+  --ad-approved-bg: #1d4128;
+  --ad-approved-ink: #8fdca6;
+  --ad-rejected-bg: #4a2323;
+  --ad-rejected-ink: #f0a3a3;
+}
+
+body.dark-mode .ad-head h2 {
+  color: #8fdca6;
+}
+
+body.dark-mode .ad-chip.is-active {
+  background: var(--ad-gold);
+  border-color: var(--ad-gold);
+  color: #2a2000;
+}
+
+body.dark-mode .ad-meta a {
+  color: #8fdca6;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 640px) {
+  .ad-card {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  .ad-card-top {
+    flex-direction: column-reverse;
+  }
+}

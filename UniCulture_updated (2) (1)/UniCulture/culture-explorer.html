@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture Explorer — UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+<style>
+/* CULTURE EXPLORER */
+.cx-hero{
+  position:relative;padding:90px 20px 70px;text-align:center;color:#fff;
+  background:linear-gradient(135deg,#1f3d1a 0%,#2d5a27 55%,#4f8a3f 100%);
+  overflow:hidden;
+}
+.cx-hero::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 45%),
+             radial-gradient(circle at 85% 80%,rgba(255,214,102,.18),transparent 40%);
+  pointer-events:none;
+}
+.cx-hero > *{position:relative;z-index:1;}
+.cx-hero h1{margin:0 0 12px;font-size:44px;letter-spacing:.3px;}
+.cx-hero p{margin:0 auto;max-width:640px;font-size:18px;line-height:1.7;opacity:.92;}
+.cx-stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:26px;}
+.cx-stat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:8px 20px;font-size:14px;font-weight:600;backdrop-filter:blur(4px);}
+
+.cx-wrap{max-width:1180px;margin:0 auto;padding:36px 20px 70px;}
+
+.cx-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:30px;}
+.cx-search{flex:1;min-width:240px;max-width:380px;padding:13px 20px;border-radius:50px;border:1px solid #d9e2d4;font-size:15px;outline:none;background:#fff;transition:.25s;}
+.cx-search:focus{border-color:#2d5a27;box-shadow:0 0 0 4px rgba(45,90,39,.12);}
+.cx-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.cx-pill{padding:9px 18px;border-radius:50px;border:1px solid #d9e2d4;background:#fff;color:#2d5a27;font-weight:700;font-size:13.5px;cursor:pointer;transition:.25s;}
+.cx-pill:hover{background:#eef5ea;}
+.cx-pill.active{background:#2d5a27;color:#fff;border-color:#2d5a27;}
+
+.cx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;}
+
+.cx-card{
+  background:#fff;border-radius:22px;overflow:hidden;cursor:pointer;
+  border:1px solid #edf1ea;box-shadow:0 6px 18px rgba(0,0,0,.06);
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.cx-card:hover{transform:translateY(-8px);box-shadow:0 22px 40px rgba(0,0,0,.14);}
+.cx-img{position:relative;height:170px;background:linear-gradient(135deg,#cfe3c6,#9cc48e);overflow:hidden;}
+.cx-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;display:block;}
+.cx-card:hover .cx-img img{transform:scale(1.08);}
+.cx-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 60%);}
+.cx-prov{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.5);}
+.cx-badge{position:absolute;right:12px;top:12px;z-index:2;padding:5px 12px;border-radius:50px;font-size:11.5px;font-weight:700;}
+.cx-badge.draft{background:#fff4d6;color:#8a6410;}
+.cx-badge.verified{background:#e3f4dc;color:#2d5a27;}
+.cx-badge.pending{background:#eceeea;color:#6a6f66;}
+.cx-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.cx-body h3{margin:0;font-size:20px;color:#2d5a27;}
+.cx-tag{margin:0;color:#666;font-size:14px;line-height:1.6;flex:1;}
+.cx-icons{display:flex;gap:6px;flex-wrap:wrap;font-size:18px;}
+.cx-icons span{background:#f3f7f0;border-radius:10px;padding:4px 8px;}
+.cx-soon{font-size:13.5px;color:#7b8077;font-style:italic;}
+.cx-card.is-pending{opacity:.78;}
+.cx-card.is-pending:hover{opacity:1;}
+
+.cx-empty{text-align:center;color:#777;padding:50px 0;display:none;}
+
+/* DETAIL PANEL */
+.cx-overlay{position:fixed;inset:0;background:rgba(10,20,8,.62);z-index:9998;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 16px;backdrop-filter:blur(3px);}
+.cx-overlay.open{display:flex;}
+.cx-panel{background:#fff;width:100%;max-width:900px;border-radius:26px;overflow:hidden;position:relative;animation:cxIn .35s ease;}
+@keyframes cxIn{from{opacity:0;transform:translateY(24px) scale(.98);}to{opacity:1;transform:none;}}
+.cx-close{position:absolute;right:16px;top:16px;z-index:5;width:40px;height:40px;border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:20px;cursor:pointer;transition:.2s;}
+.cx-close:hover{background:rgba(0,0,0,.8);transform:rotate(90deg);}
+.cx-banner{position:relative;height:230px;background:linear-gradient(135deg,#2d5a27,#6aa35a);}
+.cx-banner img{width:100%;height:100%;object-fit:cover;display:block;}
+.cx-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 65%);}
+.cx-banner-text{position:absolute;left:30px;right:30px;bottom:22px;z-index:2;color:#fff;}
+.cx-banner-text small{display:block;font-weight:700;letter-spacing:.5px;opacity:.9;margin-bottom:4px;}
+.cx-banner-text h2{margin:0;font-size:32px;}
+.cx-pbody{padding:26px 30px 32px;}
+.cx-ptag{margin:0 0 18px;color:#555;font-size:16px;line-height:1.7;}
+.cx-pchip{display:inline-block;padding:6px 14px;border-radius:50px;font-size:12.5px;font-weight:700;margin-bottom:14px;}
+.cx-pchip.draft{background:#fff4d6;color:#8a6410;}
+.cx-pchip.verified{background:#e3f4dc;color:#2d5a27;}
+
+.cx-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.cx-tab{padding:9px 16px;border-radius:50px;border:1px solid #d9e2d4;background:#f8faf6;color:#2d5a27;font-weight:700;font-size:13.5px;cursor:pointer;transition:.25s;}
+.cx-tab:hover{background:#eef5ea;}
+.cx-tab.active{background:#2d5a27;color:#fff;border-color:#2d5a27;}
+
+.cx-section{animation:cxIn .3s ease;}
+.cx-intro{margin:0 0 14px;color:#555;line-height:1.7;font-size:15.5px;}
+.cx-item{background:#f8faf6;border:1px solid #edf1ea;border-radius:16px;padding:16px 20px;margin-bottom:12px;}
+.cx-item strong{display:block;color:#2d5a27;font-size:16px;margin-bottom:4px;}
+.cx-item p{margin:0;color:#555;line-height:1.75;font-size:14.8px;}
+
+.cx-places{margin-top:26px;}
+.cx-places h4{margin:0 0 12px;color:#2d5a27;font-size:16px;}
+.cx-place-row{display:flex;gap:12px;flex-wrap:wrap;}
+.cx-place{display:flex;align-items:center;gap:10px;background:#f3f7f0;border-radius:50px;padding:6px 16px 6px 6px;text-decoration:none;color:#2d5a27;font-weight:700;font-size:13.5px;transition:.25s;}
+.cx-place:hover{background:#2d5a27;color:#fff;}
+.cx-place img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+.cx-place .ph{width:36px;height:36px;border-radius:50%;background:#cfe3c6;display:inline-block;}
+
+.cx-foot{margin-top:24px;padding-top:18px;border-top:1px dashed #dfe8d9;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start;}
+.cx-sources{font-size:13px;color:#777;line-height:1.8;max-width:620px;}
+.cx-sources a{color:#2d5a27;}
+.cx-suggest{padding:10px 22px;border-radius:50px;border:1px solid #2d5a27;color:#2d5a27;text-decoration:none;font-weight:700;font-size:14px;transition:.3s;white-space:nowrap;}
+.cx-suggest:hover{background:#2d5a27;color:#fff;}
+
+.cx-pending-box{text-align:center;padding:30px 10px 10px;color:#666;line-height:1.8;}
+.cx-pending-box .big{font-size:46px;}
+
+@media(max-width:700px){
+  .cx-hero h1{font-size:32px;}
+  .cx-pbody{padding:22px 18px 26px;}
+  .cx-banner{height:180px;}
+  .cx-banner-text h2{font-size:24px;}
+}
+
+/* DARK MODE */
+body.dark-mode .cx-search,
+body.dark-mode .cx-pill{background:#262626;border-color:#3a3a3a;color:#8fd67a;}
+body.dark-mode .cx-search{color:#e5e5e5;}
+body.dark-mode .cx-pill:hover{background:#2f2f2f;}
+body.dark-mode .cx-pill.active{background:#8fd67a;color:#16210f;border-color:#8fd67a;}
+body.dark-mode .cx-card{background:#242424;border-color:#333;box-shadow:0 6px 18px rgba(0,0,0,.4);}
+body.dark-mode .cx-card:hover{box-shadow:0 22px 40px rgba(0,0,0,.6);}
+body.dark-mode .cx-body h3{color:#8fd67a;}
+body.dark-mode .cx-tag,
+body.dark-mode .cx-soon{color:#bdbdbd;}
+body.dark-mode .cx-icons span{background:#2f2f2f;}
+body.dark-mode .cx-badge.draft{background:#3a3015;color:#e8cf7a;}
+body.dark-mode .cx-badge.verified{background:#1f2a1b;color:#8fd67a;}
+body.dark-mode .cx-badge.pending{background:#333;color:#aaa;}
+body.dark-mode .cx-empty{color:#aaa;}
+body.dark-mode .cx-panel{background:#1f1f1f;}
+body.dark-mode .cx-ptag,
+body.dark-mode .cx-intro,
+body.dark-mode .cx-item p,
+body.dark-mode .cx-pending-box{color:#bdbdbd;}
+body.dark-mode .cx-pchip.draft{background:#3a3015;color:#e8cf7a;}
+body.dark-mode .cx-pchip.verified{background:#1f2a1b;color:#8fd67a;}
+body.dark-mode .cx-tab{background:#262626;border-color:#3a3a3a;color:#8fd67a;}
+body.dark-mode .cx-tab.active{background:#8fd67a;color:#16210f;border-color:#8fd67a;}
+body.dark-mode .cx-item{background:#262626;border-color:#333;}
+body.dark-mode .cx-item strong,
+body.dark-mode .cx-places h4{color:#8fd67a;}
+body.dark-mode .cx-place{background:#2a2a2a;color:#8fd67a;}
+body.dark-mode .cx-place:hover{background:#8fd67a;color:#16210f;}
+body.dark-mode .cx-foot{border-top-color:#3a3a3a;}
+body.dark-mode .cx-sources{color:#999;}
+body.dark-mode .cx-sources a,
+body.dark-mode .cx-suggest{color:#8fd67a;border-color:#8fd67a;}
+body.dark-mode .cx-suggest:hover{background:#8fd67a;color:#16210f;}
+
+/* ---- v2: story cards ---- */
+.cx-go{font-weight:700;font-size:13.5px;color:#2d5a27;margin-top:2px;}
+.cx-card:hover .cx-go{text-decoration:underline;}
+
+.cx-soonwrap{margin-top:44px;}
+.cx-soonwrap h3{margin:0 0 14px;color:#2d5a27;font-size:18px;}
+.cx-soon{display:flex;flex-wrap:wrap;gap:10px;}
+.cx-soon-pill{padding:9px 16px;border-radius:50px;border:1px dashed #b9c9b2;background:#fafcf8;color:#4a5a45;font-size:14px;font-weight:600;cursor:pointer;transition:.25s;}
+.cx-soon-pill small{opacity:.65;font-weight:500;margin-left:4px;}
+.cx-soon-pill:hover{background:#eef5ea;border-style:solid;}
+
+.cx-banner{height:150px;}
+.cx-banner-text h2{font-size:28px;}
+
+.cx-bars{display:flex;gap:5px;margin:2px 0 14px;}
+.cx-bars i{flex:1;height:5px;border-radius:5px;background:#dfe8d9;transition:.3s;}
+.cx-bars i.done{background:#2d5a27;}
+
+.cx-story{border-radius:24px;min-height:330px;padding:34px 30px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;user-select:none;transition:background .4s;box-shadow:0 14px 30px rgba(0,0,0,.18);}
+.cx-story-inner{max-width:560px;width:100%;}
+.cx-pop{animation:cxPop .4s ease;}
+@keyframes cxPop{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:none;}}
+.cx-big{font-size:64px;line-height:1;margin-bottom:10px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));}
+.cx-label{display:inline-block;background:rgba(255,255,255,.2);padding:5px 14px;border-radius:50px;font-size:12.5px;font-weight:700;letter-spacing:.4px;margin-bottom:12px;}
+.cx-story h3{margin:0 0 10px;font-size:30px;line-height:1.2;}
+.cx-short{margin:0;font-size:19px;line-height:1.6;opacity:.97;}
+.cx-more{margin-top:16px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);color:#fff;padding:8px 18px;border-radius:50px;font-weight:700;font-size:13.5px;cursor:pointer;}
+.cx-more:hover{background:rgba(255,255,255,.35);}
+.cx-full{display:none;margin:14px 0 0;font-size:15px;line-height:1.75;background:rgba(0,0,0,.18);padding:14px 16px;border-radius:14px;text-align:left;}
+.cx-full.show{display:block;animation:cxPop .3s ease;}
+.cx-count{margin-top:18px;font-size:12.5px;opacity:.75;}
+
+.cx-nav{display:flex;align-items:center;gap:10px;margin-top:16px;}
+.cx-arrow{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #d9e2d4;background:#fff;color:#2d5a27;font-size:20px;cursor:pointer;transition:.2s;}
+.cx-arrow:hover:not(:disabled){background:#2d5a27;color:#fff;}
+.cx-arrow:disabled{opacity:.35;cursor:default;}
+.cx-nav .cx-tabs{flex:1;justify-content:center;margin:0;}
+.cx-tab{display:flex;align-items:center;gap:6px;padding:8px 12px;font-size:18px;}
+.cx-tab span{font-size:12.5px;}
+@media(max-width:700px){.cx-tab span{display:none;}.cx-story{padding:26px 18px;min-height:300px;}.cx-story h3{font-size:25px;}.cx-short{font-size:17px;}}
+
+.cx-sources summary{cursor:pointer;color:#2d5a27;font-weight:700;font-size:13.5px;}
+.cx-sources a{display:block;margin-top:6px;}
+
+body.dark-mode .cx-bars i{background:#3a3a3a;}
+body.dark-mode .cx-bars i.done{background:#8fd67a;}
+body.dark-mode .cx-go,
+body.dark-mode .cx-soonwrap h3,
+body.dark-mode .cx-sources summary{color:#8fd67a;}
+body.dark-mode .cx-soon-pill{background:#262626;border-color:#4a4a4a;color:#cfcfcf;}
+body.dark-mode .cx-arrow{background:#262626;border-color:#3a3a3a;color:#8fd67a;}
+body.dark-mode .cx-arrow:hover:not(:disabled){background:#8fd67a;color:#16210f;}
+</style>
+</head>
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+<div class="brand">
+<img src="images/logo1.png" class="logo">
+<div>
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+<small class="tagline">Bringing Cultures Together</small>
+</div>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+    <a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+  </nav>
+  <span id="auth-area"></span>
+</header>
+
+<section class="cx-hero">
+  <h1>🧭 Culture Explorer</h1>
+  <p>Go beyond the places. Discover how people live in each part of Pakistan: what they eat, wear, sing and celebrate.</p>
+  <div class="cx-stats" id="cxStats"></div>
+</section>
+
+<div class="cx-wrap">
+
+  <div class="cx-controls">
+    <input type="text" id="cxSearch" class="cx-search" placeholder="Search an area, e.g. Hunza, Swat, Karachi...">
+    <div class="cx-chips" id="cxChips"></div>
+  </div>
+
+  <div class="cx-grid" id="cxGrid">
+    <p class="cx-empty" style="display:block;">Loading cultures...</p>
+  </div>
+
+  <p class="cx-empty" id="cxEmpty">No area matches your search.</p>
+
+  <div id="cxSoonWrap" class="cx-soonwrap" style="display:none;">
+    <h3>🌱 More areas coming soon</h3>
+    <div class="cx-soon" id="cxSoon"></div>
+  </div>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="cx-overlay" id="cxOverlay">
+  <div class="cx-panel" id="cxPanel"></div>
+</div>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module" src="culture-explorer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+  <div class="brand">
+    <img src="images/logo1.png" class="logo">
+    <div>
+      <span class="uni">Uni</span><span class="culture">Culture</span><br>
+      <small class="tagline">Bringing Cultures Together</small>
+    </div>
+  </div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html" >About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+
+  <span id="auth-area"></span>
+</header>
+
+<!-- HERO ABOUT -->
+<section class="about-hero">
+  <div class="about-overlay">
+    <h1>About UniCulture</h1>
+    <p>
+      A digital platform dedicated to preserving, celebrating, and sharing Pakistan's
+      cultural heritage with the world.
+    </p>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="about-container">
+
+    <div class="about-box reveal">
+      <h2>Our Mission</h2>
+      <p>
+        To digitally preserve Pakistan's cultural heritage and make it accessible to everyone.
+      </p>
+    </div>
+
+    <div class="about-box reveal">
+      <h2>Our Vision</h2>
+      <p>
+        To create a global platform connecting communities through shared traditions.
+      </p>
+    </div>
+
+    <div class="about-box reveal">
+      <h2>Community</h2>
+      <p>
+        Built by the community, for the community. Culture belongs to everyone.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section class="contact-section">
+
+  <div class="contact-container">
+
+    <!-- LEFT INFO -->
+    <div class="contact-info">
+      <h2>Contact Us</h2>
+      <p>Have questions or suggestions? We'd love to hear from you.</p>
+
+      <div class="contact-detail">
+  <i class="fas fa-envelope"></i>
+  <div>
+    <p>info@uniculture.pk</p>
+  </div>
+</div>
+
+<div class="contact-detail">
+  <i class="fas fa-phone"></i>
+  <div>
+    <p>+92 31 1234567</p>
+  </div>
+</div>
+
+<div class="contact-detail">
+  <i class="fas fa-location-dot"></i>
+  <div>
+    <p>Karachi, Pakistan</p>
+  </div>
+</div>
+</div>
+
+    <!-- RIGHT FORM -->
+    <form class="contact-form" id="contactForm">
+
+      <div class="row">
+        <input 
+        type="text"
+        id="name"
+        placeholder="Your Name"
+        required>
+        <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required>
+      </div>
+
+      <input
+      type="text"
+      id="subject"
+      placeholder="Subject"
+      required>
+
+      <textarea
+      id="message"
+      placeholder="Your Message"
+      required></textarea>
+
+      <button type="submit">Send Message</button>
+
+    </form>
+
+  </div>
+
+</section>
+
+</section>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<!-- LOGIN / SIGNUP POPUP -->
+
+<div class="popup-overlay" id="authPopup">
+
+  <div class="popup-container">
+
+    <!-- LEFT IMAGE -->
+
+    <div class="popup-left">
+      <img src="images/login image.png">
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="popup-right">
+
+      <!-- CLOSE BUTTON -->
+
+      <span class="close-btn" id="closePopup">
+        &times;
+      </span>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button class="tab" id="signupTab">
+          Signup
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Login
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm" style="display:none;">
+
+        <div class="input-group">
+          <input type="text"
+          placeholder="Full Name"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Create Account
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="contact.js"></script>
+
+</body>
+</html>

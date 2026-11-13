@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture of Pakistan — UniCulture</title>
+<link rel="stylesheet" href="style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS (preflight is off, so it does not disturb the existing navbar and footer) -->
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  corePlugins: { preflight: false },
+  darkMode: ['variant', '&:is(body.dark-mode *)'],
+  theme: { extend: {
+    colors: { uni: { green: '#3d6a35', dark: '#1f3d1a', gold: '#f3b64e', cream: '#f8f6ef', sand: '#efeadb' } },
+    fontFamily: { sans: ['Poppins', 'Inter', 'system-ui', 'sans-serif'], display: ['"Playfair Display"', 'Georgia', 'serif'] }
+  } }
+};
+</script>
+<style>
+  /* small scoped reset. :where() gives it zero specificity, so Tailwind utilities (padding, margin, bg) always win */
+  :where(.tw-root), :where(.tw-root) *, :where(.tw-root) *::before, :where(.tw-root) *::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; }
+  :where(.tw-root) h1, :where(.tw-root) h2, :where(.tw-root) h3, :where(.tw-root) p { margin: 0; }
+  :where(.tw-root) img { display: block; max-width: 100%; }
+  :where(.tw-root) a { text-decoration: none; }
+  :where(.tw-root) button { font: inherit; cursor: pointer; background: none; padding: 0; }
+  :where(.tw-root) input { font: inherit; }
+  .slant { clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%); }
+
+  /* navbar: the Culture link looks exactly like the other links (no bold, no highlight) */
+  .nav-links a.nav-culture,
+  .nav-links a.nav-culture.active { font-weight: 600 !important; color: #265430 !important; }
+  .nav-links a.nav-culture:hover { color: #82a450 !important; }
+  body.dark-mode .nav-links a.nav-culture,
+  body.dark-mode .nav-links a.nav-culture.active { color: inherit !important; }
+</style>
+</head>
+<body>
+<script src="theme.js"></script>
+<header class="navbar">
+<div class="brand">
+<img src="images/logo1.png" class="logo">
+<div>
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+<small class="tagline">Bringing Cultures Together</small>
+</div>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+  <span id="auth-area"></span>
+</header>
+
+<main class="tw-root font-sans bg-uni-cream text-slate-800 dark:bg-[#121512] dark:text-slate-200">
+
+  <!-- HERO (short, so the region cards are visible straight away) -->
+  <section class="relative overflow-hidden bg-uni-dark text-white">
+    <div class="absolute inset-y-0 right-0 hidden w-[52%] lg:flex" aria-hidden="true">
+      <img src="images/lahorefort.webp" alt="" class="slant h-full min-w-0 flex-1 object-cover" style="object-position:center 40%">
+      <img src="images/Attabad.jpg" alt="" class="slant -ml-[5%] h-full min-w-0 flex-1 object-cover">
+      <img src="images/kalash.jpg" alt="" class="slant -ml-[5%] h-full min-w-0 flex-1 object-cover" style="object-position:center 30%">
+      <img src="images/makli-heritage.jpg" alt="" class="slant -ml-[5%] h-full min-w-0 flex-1 object-cover">
+    </div>
+    <div class="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-uni-dark via-uni-dark/95 to-transparent lg:block" style="background-image:linear-gradient(90deg,#1f3d1a 0%,#1f3d1a 42%,rgba(31,61,26,0) 62%)"></div>
+
+    <div class="relative z-10 mx-auto max-w-6xl px-6 py-10">
+      <div class="max-w-xl">
+        <p class="text-[11px] font-semibold tracking-[0.25em] text-uni-gold">DISCOVER · LEARN · EXPERIENCE</p>
+        <h1 class="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">Preserving Culture,<br><span class="italic text-uni-gold">Celebrating Heritage</span></h1>
+        <p class="mt-3 max-w-md text-sm leading-relaxed text-white/85">Explore the vibrant traditions, languages, cuisines and timeless stories that define Pakistan's cultural identity across its regions.</p>
+        <div class="mt-5 flex flex-wrap items-center gap-3">
+          <a href="#regions" class="rounded-full bg-uni-gold px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:brightness-105">Explore regions →</a>
+          <a href="cultural-map.html" class="rounded-full border border-white/60 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/15">Interactive map</a>
+          <span id="heroStats" class="ml-1 text-xs text-white/70"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGIONS -->
+  <section class="mx-auto max-w-6xl px-6 pt-8">
+    <p id="regions" class="scroll-mt-24 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-600">Explore by region</p>
+    <h2 class="font-display text-2xl font-bold text-uni-dark dark:text-white">Our cultural regions</h2>
+    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Each region has its own language, food and way of life. Pick one to see its guides.</p>
+    <div id="regionCards" class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"></div>
+  </section>
+
+  <!-- CATEGORIES (same pictures as the Categories page) -->
+  <section class="mt-10 bg-uni-sand py-9 dark:bg-[#171a17]">
+    <div class="mx-auto max-w-6xl px-6">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-600">Explore by category</p>
+      <h2 class="font-display text-2xl font-bold text-uni-dark dark:text-white">Discover Pakistan's cultural treasures</h2>
+      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">From heritage and languages to festivals, music, food and crafts.</p>
+      <div id="catCards" class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <!-- DESTINATIONS -->
+  <section class="mx-auto max-w-6xl px-6 pt-10 pb-12">
+    <p id="places" class="scroll-mt-24 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-600">Featured destinations</p>
+    <h2 class="font-display text-2xl font-bold text-uni-dark dark:text-white">Must-visit cultural places</h2>
+    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Each guide covers the culture first, then where to go, what to eat and how to plan your day.</p>
+
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <input id="q" type="text" placeholder="Search a city or region..." class="w-full max-w-xs rounded-full border border-slate-300 bg-white px-4 py-2 text-sm outline-none focus:border-uni-green focus:ring-2 focus:ring-uni-green/20 dark:border-slate-600 dark:bg-[#1c201c] dark:text-slate-100">
+      <div id="chips" class="flex flex-wrap gap-2"></div>
+    </div>
+
+    <div id="ready" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+
+    <h3 id="soonH" class="mt-8 font-display text-lg font-bold text-uni-dark dark:text-white">Coming soon</h3>
+    <div id="soon" class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"></div>
+    <p id="empty" class="hidden py-10 text-center text-sm text-slate-500">Nothing matches your search.</p>
+
+    <a href="trip-planner.html" class="mt-10 flex flex-wrap items-center justify-between gap-5 rounded-3xl bg-gradient-to-br from-uni-dark to-uni-green px-7 py-6 text-white shadow-xl transition hover:-translate-y-1">
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-uni-gold">Plan your cultural journey</p>
+        <h3 class="font-display text-xl font-bold">Create your personalised trip</h3>
+        <p class="mt-1 max-w-xl text-sm text-white/85">Use our Trip Planner to explore destinations, set your preferences and get a custom itinerary.</p>
+      </div>
+      <span class="rounded-full bg-uni-gold px-5 py-2.5 text-sm font-semibold text-slate-900">Plan your trip →</span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module">
+import { CITIES, PROVINCES } from "./city-data.js";
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const label = (p) => p === "Islamabad Capital Territory" ? "Islamabad" : p;
+let province = "All";
+
+const REGIONS = [
+  { p: "Punjab", img: "images/lahorefort.webp", pos: "center 40%", t: "Mughal heritage, big flavours and lively festivals" },
+  { p: "Sindh", img: "images/makli-heritage.jpg", pos: "center", t: "Ancient history, coastal beauty and colourful crafts" },
+  { p: "Khyber Pakhtunkhwa", img: "images/kalash.jpg", pos: "center 30%", t: "Mountains, warm hospitality and old bazaars" },
+  { p: "Balochistan", img: "images/Hanna_Lake_Quetta.jpg", pos: "center", t: "Rugged landscapes, a long coastline and fine handicrafts" },
+  { p: "Gilgit-Baltistan", img: "images/Attabad.jpg", pos: "center", t: "Majestic mountains, forts and mountain traditions" },
+  { p: "Islamabad Capital Territory", img: "images/islamabad.jpg", pos: "center", t: "A calm, green capital with museums and hills" }
+];
+
+// the same pictures and links the Categories page uses
+const CATS = [
+  { n: "Heritage sites", t: "Forts, tombs and ancient cities", img: "images/heritage.webp", href: "heritage.html" },
+  { n: "Languages", t: "Local languages and dialects", img: "images/people.jpg", href: "languages.html" },
+  { n: "Festivals", t: "Celebrations and seasonal events", img: "images/festival.jpg", href: "festivals.html" },
+  { n: "Music and dance", t: "Folk music, dance and performances", img: "images/music.webp", href: "music.html" },
+  { n: "Traditional food", t: "Traditional dishes and local flavours", img: "images/food.webp", href: "food.html" },
+  { n: "Arts and handicrafts", t: "Crafts, embroidery and pottery", img: "images/artsandhandi.jpg", href: "handicrafts.html" }
+];
+
+const shade = '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>';
+
+document.getElementById("regionCards").innerHTML = REGIONS.map((r) => {
+  const ready = CITIES.filter((c) => c.province === r.p && c.status !== "soon").length;
+  return `<button type="button" data-p="${esc(r.p)}" class="group relative h-52 overflow-hidden rounded-2xl text-left shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+    <img src="${esc(r.img)}" alt="${esc(label(r.p))}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" style="object-position:${esc(r.pos)}">
+    ${shade}
+    <div class="absolute inset-x-3 bottom-3 text-white">
+      <h3 class="font-display text-lg font-bold leading-tight">${esc(label(r.p))}</h3>
+      <p class="mt-0.5 line-clamp-2 text-[11px] leading-snug text-white/85">${esc(r.t)}</p>
+      <span class="mt-1 inline-block text-[11px] font-semibold text-uni-gold">${ready ? ready + (ready === 1 ? " guide ready" : " guides ready") : "Coming soon"} →</span>
+    </div>
+  </button>`;
+}).join("");
+
+document.getElementById("catCards").innerHTML = CATS.map((c) =>
+  `<a href="${esc(c.href)}" class="group relative block h-36 overflow-hidden rounded-2xl shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+    <img src="${esc(c.img)}" alt="${esc(c.n)}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110">
+    ${shade}
+    <div class="absolute inset-x-3.5 bottom-3 text-white"><h3 class="font-display text-base font-bold leading-tight">${esc(c.n)}</h3><p class="mt-0.5 line-clamp-1 text-[11px] text-white/85">${esc(c.t)}</p></div>
+  </a>`).join("");
+
+const readyCount = CITIES.filter((c) => c.status !== "soon").length;
+document.getElementById("heroStats").textContent = `${REGIONS.length} regions · ${readyCount} guides ready`;
+
+function card(c) {
+  const soon = c.status === "soon";
+  return `<a href="city.html?id=${encodeURIComponent(c.id)}" class="group relative block ${soon ? "h-32" : "h-56"} overflow-hidden rounded-2xl shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+    <img src="${esc(c.img)}" alt="${esc(c.name)}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110 ${soon ? "grayscale-[.6]" : ""}" style="object-position:${esc(c.imgPos || "center")}">
+    ${shade}
+    <span class="absolute right-3 top-3 rounded-full ${soon ? "bg-black/55 text-white" : "bg-white/95 text-uni-green"} px-3 py-1 text-[11px] font-semibold">${soon ? "Coming soon" : "Explore"}</span>
+    <div class="absolute inset-x-3.5 bottom-3 text-white">
+      <p class="text-[10px] font-semibold uppercase tracking-wider text-uni-gold">${esc(label(c.province))}</p>
+      <h3 class="font-display ${soon ? "text-base" : "text-xl"} font-bold leading-tight">${esc(c.name)}</h3>
+      ${soon ? "" : `<p class="mt-0.5 line-clamp-2 text-[11px] leading-snug text-white/85">${esc(c.tagline)}</p>`}
+    </div>
+  </a>`;
+}
+
+function render() {
+  const t = document.getElementById("q").value.trim().toLowerCase();
+  const list = CITIES.filter((c) =>
+    (province === "All" || c.province === province) &&
+    (!t || c.name.toLowerCase().includes(t) || c.province.toLowerCase().includes(t)));
+  const ready = list.filter((c) => c.status !== "soon");
+  const soon = list.filter((c) => c.status === "soon");
+  document.getElementById("ready").innerHTML = ready.map(card).join("");
+  document.getElementById("soon").innerHTML = soon.map(card).join("");
+  document.getElementById("soonH").classList.toggle("hidden", !soon.length);
+  document.getElementById("empty").classList.toggle("hidden", !!list.length);
+}
+
+function chips() {
+  const on = "border-uni-green bg-uni-green text-white";
+  const off = "border-slate-300 bg-white text-uni-green hover:border-uni-green dark:border-slate-600 dark:bg-[#1c201c] dark:text-emerald-300";
+  document.getElementById("chips").innerHTML = ["All", ...PROVINCES].map((p) =>
+    `<button type="button" data-p="${esc(p)}" class="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition ${p === province ? on : off}">${esc(label(p))}</button>`).join("");
+}
+
+function setProvince(p, scroll) {
+  province = p; chips(); render();
+  history.replaceState(null, "", p === "All" ? location.pathname : "#" + encodeURIComponent(p));
+  if (scroll) document.getElementById("places").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("chips").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) setProvince(b.dataset.p, false); });
+document.getElementById("regionCards").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) setProvince(b.dataset.p, true); });
+document.getElementById("q").addEventListener("input", render);
+
+chips(); render();
+const h = decodeURIComponent((location.hash || "").slice(1));
+if (PROVINCES.includes(h)) setProvince(h, true);
+</script>
+</body></html>

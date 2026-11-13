@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karachi — UniCulture</title>
+<link rel="stylesheet" href="style.css?v=4">
+<style>
+.kx-hero{position:relative;background:linear-gradient(135deg,#1f3d1a 0%,#2d5a27 55%,#4f8a3f 100%);color:#fff;overflow:hidden;}
+.kx-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.12),transparent 45%),radial-gradient(circle at 90% 85%,rgba(255,214,102,.2),transparent 40%);pointer-events:none;}
+.kx-hero-in{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:46px 22px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
+.kx-hero small{letter-spacing:2px;font-weight:700;opacity:.9;font-size:13px;}
+.kx-hero h1{margin:8px 0 12px;font-size:58px;line-height:1.05;}
+.kx-hero p{margin:0;max-width:480px;font-size:18px;line-height:1.65;opacity:.95;}
+.kx-hero-photo{height:380px;border-radius:26px;overflow:hidden;box-shadow:0 22px 44px rgba(0,0,0,.35);border:4px solid rgba(255,255,255,.85);transform:rotate(1.5deg);}
+.kx-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;}
+@media(max-width:800px){.kx-hero-in{grid-template-columns:1fr;gap:24px;padding:34px 20px;}.kx-hero h1{font-size:40px;}.kx-hero-photo{height:260px;transform:none;}}
+
+.kx-switch-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid #edf1ea;padding:12px 16px;}
+.kx-switch{display:flex;max-width:560px;margin:0 auto;background:#eef3ea;border-radius:60px;padding:5px;gap:4px;}
+.kx-switch button{flex:1;border:none;background:transparent;padding:12px 10px;border-radius:50px;font-weight:700;font-size:14.5px;color:#2d5a27;cursor:pointer;transition:.3s;}
+.kx-switch button.on{background:#2d5a27;color:#fff;box-shadow:0 6px 14px rgba(45,90,39,.35);}
+
+.kx-wrap{max-width:1100px;margin:0 auto;padding:34px 22px 60px;}
+.kx-h{margin:46px 0 6px;font-size:28px;color:#1f3d1a;}
+.kx-sub{margin:0 0 20px;color:#667;font-size:15.5px;}
+
+.kx-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:6px;}
+.kx-fact{background:#f4f8f1;border-radius:18px;padding:16px 18px;}
+.kx-fact b{display:block;color:#2d5a27;margin-bottom:4px;font-size:14.5px;}
+.kx-fact span{color:#555;font-size:14px;line-height:1.55;}
+
+.kx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;}
+.kx-card{background:#fff;border-radius:22px;overflow:hidden;border:1px solid #edf1ea;box-shadow:0 6px 18px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.kx-card:hover{transform:translateY(-7px);box-shadow:0 20px 38px rgba(0,0,0,.15);}
+.kx-ph{position:relative;height:200px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.kx-ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.kx-card:hover .kx-ph img{transform:scale(1.08);}
+.kx-ph .em{font-size:64px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));}
+.kx-ph .need{position:absolute;right:10px;bottom:8px;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:3px 9px;border-radius:50px;}
+.kx-tagpill{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);color:#2d5a27;font-weight:700;font-size:12px;padding:5px 12px;border-radius:50px;}
+.kx-body{padding:16px 20px 18px;}
+.kx-body h3{margin:0 0 6px;font-size:20px;color:#2d5a27;}
+.kx-body p{margin:0;color:#555;line-height:1.6;font-size:14.8px;}
+.kx-more{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #dfe8d9;color:#555;font-size:14px;line-height:1.65;}
+.kx-card.open .kx-more{display:block;}
+.kx-tap{margin-top:10px;font-size:12.5px;color:#2d5a27;font-weight:700;}
+
+.kx-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+.kx-rule{display:flex;gap:14px;background:#fffaf0;border:1px solid #f3e6c4;border-radius:18px;padding:18px;}
+.kx-rule .ic{font-size:30px;line-height:1;}
+.kx-rule p{margin:0;color:#4c4430;line-height:1.6;font-size:14.8px;}
+
+.kx-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+.kx-chips span{background:#2d5a27;color:#fff;padding:8px 18px;border-radius:50px;font-weight:700;font-size:13.5px;}
+
+.kx-banner{margin-top:26px;background:linear-gradient(135deg,#2d5a27,#4f8a3f);color:#fff;border-radius:22px;padding:22px 26px;font-size:16px;line-height:1.6;}
+.kx-banner b{display:block;font-size:18px;margin-bottom:4px;}
+
+.kx-foot{margin-top:50px;padding-top:20px;border-top:1px dashed #dfe8d9;font-size:13px;color:#777;line-height:1.8;}
+.kx-foot summary{cursor:pointer;font-weight:700;color:#2d5a27;font-size:14px;}
+.kx-foot a{display:block;color:#2d5a27;margin-top:5px;}
+.kx-foot .note{margin-top:14px;font-style:italic;}
+
+body.mode-visitor .only-local{display:none;}
+body.mode-local .only-visitor{display:none;}
+.kx-sec{animation:kxIn .4s ease;}
+@keyframes kxIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+
+body.dark-mode .kx-switch-wrap{background:rgba(24,24,24,.94);border-color:#333;}
+body.dark-mode .kx-switch{background:#2a2a2a;}
+body.dark-mode .kx-switch button{color:#8fd67a;}
+body.dark-mode .kx-switch button.on{background:#8fd67a;color:#16210f;}
+body.dark-mode .kx-h{color:#8fd67a;}
+body.dark-mode .kx-sub,body.dark-mode .kx-fact span,body.dark-mode .kx-body p,body.dark-mode .kx-more,body.dark-mode .kx-foot{color:#bdbdbd;}
+body.dark-mode .kx-fact{background:#262626;}
+body.dark-mode .kx-fact b,body.dark-mode .kx-body h3,body.dark-mode .kx-tap,body.dark-mode .kx-foot summary,body.dark-mode .kx-foot a{color:#8fd67a;}
+body.dark-mode .kx-card{background:#242424;border-color:#333;}
+body.dark-mode .kx-rule{background:#2b2718;border-color:#4a4226;}
+body.dark-mode .kx-rule p{color:#e3dcc3;}
+body.dark-mode .kx-more{border-top-color:#3a3a3a;}
+</style>
+</head>
+<body>
+<script src="theme.js"></script>
+<header class="navbar">
+<div class="brand">
+<img src="images/logo1.png" class="logo">
+<div>
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+<small class="tagline">Bringing Cultures Together</small>
+</div>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+  <span id="auth-area"></span>
+</header>
+
+<section class="kx-hero">
+  <div class="kx-hero-in">
+    <div>
+      <small>SINDH · PAKISTAN</small>
+      <h1>Karachi</h1>
+      <p>Pakistan's biggest city: colonial palaces, a long Arabian Sea coast, and some of the country's best street food.</p>
+    </div>
+    <div class="kx-hero-photo"><img src="images/clifton.jpg" alt="Clifton Beach, Karachi"></div>
+  </div>
+</section>
+
+<div class="kx-wrap">
+
+  <div class="kx-sec">
+    <h2 class="kx-h" style="margin-top:6px;">Karachi at a glance</h2>
+    <div class="kx-facts" id="facts"></div>
+  </div>
+
+  <div class="kx-sec">
+    <h2 class="kx-h">Places to see</h2>
+    <p class="kx-sub">Tap a card to know more. Opening days can change, so check before you go.</p>
+    <div class="kx-grid" id="see"></div>
+  </div>
+
+  <div class="kx-sec">
+    <div class="kx-banner" >
+      <b>🍽 Eat like a Karachiite</b>
+      Evenings from late autumn are the best time for Burns Road, once the daytime heat fades. Dinner here runs late and that is completely normal.
+    </div>
+  </div>
+
+  <div class="kx-sec">
+    <h2 class="kx-h">Where to eat</h2>
+    <p class="kx-sub">Tap a card to see where to go.</p>
+    <div class="kx-chips"><span>Burns Road</span><span>Boat Basin</span><span>Dhoraji</span><span>Do Darya</span></div>
+    <div class="kx-grid" id="food"></div>
+  </div>
+
+  <div class="kx-sec">
+    <h2 class="kx-h">Hang out and shop</h2>
+    <div class="kx-grid" id="hang"></div>
+  </div>
+
+  <div class="kx-sec">
+    <h2 class="kx-h">Good to know if it's your first visit</h2>
+    <p class="kx-sub">A few simple things that make your trip smoother and more respectful.</p>
+    <div class="kx-rules" id="rules"></div>
+    <div class="kx-banner">
+      <b>🎭 Karachi's cultural season is winter</b>
+      January often brings literary gatherings such as the Karachi Literature Festival, and February has celebrations linked to Sindhi heritage.
+    </div>
+  </div>
+
+  <div class="kx-foot">
+    <details>
+      <summary>Sources</summary>
+      <a href="https://www.dawn.com/news/amp/1140694" target="_blank" rel="noopener">Best desi food in Karachi (Dawn)</a>
+      <a href="https://www.zameen.com/blog/must-have-desi-food-items-karachi.html" target="_blank" rel="noopener">Must-have desi food items in Karachi (Zameen)</a>
+      <a href="https://www.zameen.com/blog/food-karachi-lahore.html" target="_blank" rel="noopener">Food in Karachi and Lahore (Zameen)</a>
+      <a href="https://theculturetrip.com/articles/20-must-visit-attractions-in-karachi-pakistan" target="_blank" rel="noopener">Must-visit attractions in Karachi (The Culture Trip)</a>
+      <a href="https://awaywiththesteiners.com/things-to-do-in-karachi-pakistan/amp/" target="_blank" rel="noopener">Things to do in Karachi (Away With The Steiners)</a>
+      <a href="https://championtraveler.com/dates/best-time-to-visit-karachi-pk/" target="_blank" rel="noopener">Best time to visit Karachi (Champion Traveler)</a>
+      <a href="https://www.lastminute.com/holidays/pk_pakistan/karachi-d1400163916" target="_blank" rel="noopener">Holidays to Karachi (lastminute.com)</a>
+      <a href="https://blog.turkishairlines.com/en/?p=3711" target="_blank" rel="noopener">A journey in Karachi (Turkish Airlines blog)</a>
+    </details>
+    <p class="note">Prototype draft. Please verify details with local sources, and always check your government's latest travel advice before visiting. <a href="contribute.html" style="display:inline;">✍ Suggest a correction</a></p>
+  </div>
+
+</div>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script>
+// ---- Karachi data (prototype: kept here until we move it to Firestore) ----
+var FACTS = [
+  { b: "🗓 Best time", t: "Late November to early March: mild and dry, around 27°C. May and June can reach about 35°C." },
+  { b: "🗣 Languages", t: "Urdu is the national language. English is widely spoken in hotels and tourist areas." },
+  { b: "👗 What to wear", t: "Dress modestly. A long tunic or shalwar kameez is comfortable and respectful." },
+  { b: "🚕 Getting around", t: "Taxis and ride-hailing apps are the easiest way to move around." }
+];
+
+var SEE = [
+  { n: "Clifton Beach", e: "🌊", c1: "#0ea5e9", c2: "#0369a1", img: "images/clifton.jpg", tag: "Sunset", s: "On the Arabian Sea, also called Sea View. A favourite for an evening walk.", m: "Do Darya's seaside restaurants are close by along the same coast road." },
+  { n: "Mazar-e-Quaid", e: "🕌", c1: "#64748b", c2: "#334155", tag: "Landmark", s: "The marble mausoleum of Pakistan's founder, Muhammad Ali Jinnah.", m: "Commonly listed as closed on Mondays. Dress modestly." },
+  { n: "Mohatta Palace", e: "🏛", c1: "#e11d48", c2: "#9f1239", tag: "Museum", s: "A pink and yellow stone palace in Clifton, built in the 1920s as a summer home.", m: "Its style blends Islamic and British influences (Indo-Saracenic). Now a museum and art venue. Commonly listed as closed on Mondays." },
+  { n: "Frere Hall", e: "🏰", c1: "#7c3aed", c2: "#5b21b6", tag: "Colonial", s: "A Gothic-style hall from 1865, now an exhibition space and library with gardens.", m: "Often hosts art shows and events. Commonly listed as closed on Sundays." },
+  { n: "Empress Market", e: "🛍", c1: "#f59e0b", c2: "#b45309", tag: "Market", s: "A colourful, busy colonial-era market in Saddar, named after Queen Victoria.", m: "Sells almost everything, from fresh produce to souvenirs. Expect crowds." },
+  { n: "Zainab Market", e: "🧵", c1: "#14b8a6", c2: "#0f766e", tag: "Shopping", s: "Often described as Karachi's oldest variety market, good for handicrafts and souvenirs.", m: "Bargaining is common in markets like this." }
+];
+
+var FOOD = [
+  { n: "Nihari", e: "🍲", c1: "#b45309", c2: "#78350f", img: "images/nihari.jpg", tag: "Must try", s: "A slow-cooked beef stew eaten with naan, ginger, green chilli and lemon.", m: "Popular spots: Zahid Nihari (Tariq Road), Javed Nihari, Sabri Nihari (M.A. Jinnah Road) and Nihari Inn (Boat Basin)." },
+  { n: "Bun kabab", e: "🍔", c1: "#f59e0b", c2: "#ea580c", tag: "Street food", s: "Karachi's all-time favourite street snack. Go to Burns Road or Pakistan Chowk for the original.", m: "Almost every neighbourhood has a seller, each with a slightly different take." },
+  { n: "Biryani", e: "🍛", c1: "#dc2626", c2: "#991b1b", img: "images/biryani.jpg", tag: "Classic", s: "Many styles across the city. Student Biryani in Saddar is a local favourite.", m: "Tip: ask the waiter for less spicy rice and they will usually adjust it." },
+  { n: "Halwa puri breakfast", e: "🥞", c1: "#eab308", c2: "#a16207", tag: "Breakfast", s: "Sweet halwa, puris, and potato-chickpea curry with mango pickle.", m: "Boat Basin is the most famous area for this breakfast." },
+  { n: "Fry kebab and BBQ", e: "🍢", c1: "#ef4444", c2: "#b91c1c", tag: "Burns Road", s: "Waheed Kabab House, near Burns Road, is known for fry kebab and dhaga kebab.", m: "Sheikh Abdul Ghaffar Kebab House (off Tariq Road) is another well-known name." },
+  { n: "Fresh fish", e: "🐟", c1: "#0ea5e9", c2: "#0369a1", tag: "Seafood", s: "Try fried fish at Yadgar (Jamshed Road) or the Kaemari seafood street.", m: "For a seaside dinner, Do Darya in Clifton is a popular choice." }
+];
+
+var HANG = [
+  { n: "Sea View and Do Darya", e: "🌅", c1: "#f97316", c2: "#c2410c", s: "Evening walks, sunsets and seaside restaurants." },
+  { n: "Bagh Ibne Qasim", e: "🌳", c1: "#22c55e", c2: "#15803d", s: "Karachi's largest park, about 130 acres near Clifton Beach." },
+  { n: "Tariq Road and Zamzama", e: "👜", c1: "#ec4899", c2: "#be185d", s: "Popular shopping areas for clothes, handicrafts and fashion." }
+];
+
+var RULES = [
+  { i: "🕌", t: "At mosques and shrines, dress conservatively, cover your head and take off your shoes before entering." },
+  { i: "👗", t: "Women in non-local clothes may draw curious looks. A long tunic or shalwar kameez helps you feel comfortable." },
+  { i: "🌙", t: "Ramadan is the holiest month of the Muslim calendar. Please behave respectfully during it." },
+  { i: "🛂", t: "Check your government's latest travel advice and Pakistan's visa rules before you travel." }
+];
+
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+function card(x){
+  var ph = x.img
+    ? '<img src="'+esc(x.img)+'" alt="'+esc(x.n)+'" loading="lazy">'
+    : '<span class="em">'+x.e+'</span><span class="need">photo coming</span>';
+  return '<div class="kx-card" onclick="this.classList.toggle(\'open\')">'
+    + '<div class="kx-ph" style="background:linear-gradient(135deg,'+x.c1+','+x.c2+')">'+ph
+    + (x.tag ? '<span class="kx-tagpill">'+esc(x.tag)+'</span>' : '') + '</div>'
+    + '<div class="kx-body"><h3>'+esc(x.n)+'</h3><p>'+esc(x.s)+'</p>'
+    + (x.m ? '<div class="kx-more">'+esc(x.m)+'</div><div class="kx-tap">Tap for more ▾</div>' : '')
+    + '</div></div>';
+}
+
+document.getElementById("facts").innerHTML = FACTS.map(function(f){return '<div class="kx-fact"><b>'+f.b+'</b><span>'+esc(f.t)+'</span></div>';}).join("");
+document.getElementById("see").innerHTML = SEE.map(card).join("");
+document.getElementById("food").innerHTML = FOOD.map(card).join("");
+document.getElementById("hang").innerHTML = HANG.map(card).join("");
+document.getElementById("rules").innerHTML = RULES.map(function(r){return '<div class="kx-rule"><span class="ic">'+r.i+'</span><p>'+esc(r.t)+'</p></div>';}).join("");
+
+</script>
+</body>
+</html>

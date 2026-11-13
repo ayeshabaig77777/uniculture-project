@@ -1,0 +1,316 @@
+/* =========================================================
+   AI Guide page - size and layout fixes
+   Loaded AFTER style.css (see ai-guide.html), so it only overrides
+   the sizes below. Colors, fonts and dark mode are not touched.
+   ========================================================= */
+
+/* The chat box now follows the height of the browser window,
+   so the message box and the input are always visible without scrolling. */
+
+.ai-guide-section {
+  padding: 24px 24px 56px;
+}
+
+.ai-chat-shell {
+  max-width: 1320px;
+  height: clamp(540px, calc(100vh - 185px), 800px);
+  height: clamp(540px, calc(100dvh - 185px), 800px);
+}
+
+/* ---------- Left sidebar ---------- */
+
+.ai-sidebar {
+  width: 260px;
+  padding: 22px 20px;
+}
+
+.ai-sidebar-title {
+  font-size: 21px;
+  margin: 8px 0 10px;
+}
+
+.ai-sidebar-desc {
+  margin-bottom: 16px;
+}
+
+.ai-sidebar-label {
+  margin: 18px 0 8px;
+}
+
+/* ---------- Center chat ---------- */
+
+.ai-chat-main {
+  padding: 16px 28px 14px;
+}
+
+.ai-back-row {
+  padding: 0 0 8px;
+}
+
+.ai-chat-header {
+  padding-bottom: 10px;
+}
+
+.ai-chat-header h2 {
+  font-size: 20px;
+}
+
+/* Only the message list scrolls. The input stays pinned at the bottom. */
+
+.ai-guide-messages {
+  min-height: 0;
+  padding: 12px 4px;
+}
+
+.ai-msg {
+  font-size: 15px;
+}
+
+.ai-guide-suggestions {
+  flex-shrink: 0;
+  padding: 10px 4px;
+}
+
+.ai-guide-form {
+  flex-shrink: 0;
+}
+
+.ai-disclaimer {
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* ---------- Right panel ---------- */
+
+.ai-right-panel {
+  width: 290px;
+  padding: 18px;
+  gap: 16px;
+}
+
+.ai-discover-card {
+  flex-shrink: 0;
+  height: 150px;
+}
+
+/* ---------- Short screens (laptops, or browser zoom at 125% and above) ---------- */
+
+@media (max-height: 780px) {
+
+  .ai-sidebar-desc,
+  .ai-sidebar-fact {
+    display: none;
+  }
+
+  .ai-sidebar-title {
+    font-size: 18px;
+  }
+
+  .ai-chat-header h2 {
+    font-size: 18px;
+  }
+
+  .ai-guide-suggestions {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .ai-suggestion-chip {
+    padding: 8px 10px;
+  }
+
+  .ai-discover-card {
+    height: 120px;
+  }
+
+}
+
+/* ---------- Tablets and phones ---------- */
+
+@media (max-width: 900px) {
+
+  .ai-chat-shell {
+    height: clamp(480px, calc(100vh - 190px), 780px);
+    height: clamp(480px, calc(100dvh - 190px), 780px);
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .ai-guide-section {
+    padding: 14px 10px 40px;
+  }
+
+  .ai-chat-main {
+    padding: 14px 14px 12px;
+  }
+
+  .ai-guide-suggestions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   Message rows: Copy and Edit buttons under each message
+   ========================================================= */
+
+.ai-msg-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 78%;
+}
+
+.ai-msg-row-user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.ai-msg-row-bot {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+/* The bubble now sits inside the row, so the row controls the width */
+.ai-msg-row .ai-msg {
+  max-width: 100%;
+  align-self: auto;
+}
+
+.ai-msg-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.ai-msg-row:hover .ai-msg-actions,
+.ai-msg-row:focus-within .ai-msg-actions {
+  opacity: 1;
+}
+
+/* Phones and tablets have no hover, so keep the buttons visible */
+@media (hover: none) {
+  .ai-msg-actions {
+    opacity: 1;
+  }
+}
+
+.ai-act-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6b7a70;
+  cursor: pointer;
+}
+
+.ai-act-btn:hover {
+  background: rgba(30, 77, 47, 0.1);
+  color: #1e4d2f;
+}
+
+.ai-act-btn:focus-visible {
+  outline: 2px solid #d4a72c;
+  outline-offset: 1px;
+}
+
+.ai-act-btn.is-done {
+  color: #1d6b36;
+}
+
+body.dark-mode .ai-act-btn {
+  color: #9fb0a4;
+}
+
+body.dark-mode .ai-act-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8efe9;
+}
+
+body.dark-mode .ai-act-btn.is-done {
+  color: #8fdca6;
+}
+
+/* ---------- Editing a message ---------- */
+
+.ai-msg-row.is-editing {
+  width: 78%;
+}
+
+.ai-edit-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 2px solid #265430;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #1c2b21;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+}
+
+.ai-edit-input:focus {
+  outline: 2px solid #d4a72c;
+  outline-offset: 1px;
+}
+
+.ai-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ai-edit-cancel,
+.ai-edit-send {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-edit-cancel {
+  border: 1px solid #d5ddd6;
+  background: transparent;
+  color: inherit;
+}
+
+.ai-edit-send {
+  border: 1px solid #265430;
+  background: #265430;
+  color: #ffffff;
+}
+
+/* Send is greyed out until the visitor actually changes the text */
+.ai-edit-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+body.dark-mode .ai-edit-input {
+  background: #1a261e;
+  color: #e8efe9;
+  border-color: #3c6a48;
+}
+
+@media (max-width: 640px) {
+  .ai-msg-row,
+  .ai-msg-row.is-editing {
+    max-width: 92%;
+  }
+
+  .ai-msg-row.is-editing {
+    width: 92%;
+  }
+}

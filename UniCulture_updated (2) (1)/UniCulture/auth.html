@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UniCulture Auth</title>
+
+<link rel="stylesheet" href="style.css?v=3">
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+}
+
+.auth-container{
+    width:400px;
+    margin:80px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.auth-container h2{
+    text-align:center;
+    color:#265430;
+}
+
+.auth-container input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.auth-btn{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    background:#265430;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.toggle-link{
+    text-align:center;
+    margin-top:15px;
+    cursor:pointer;
+    color:#265430;
+}
+
+</style>
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<div class="auth-container">
+
+<h2 id="title">Login</h2>
+
+<form id="authForm">
+
+<input type="text" id="username" placeholder="Username" style="display:none;">
+
+<input type="email" id="email" placeholder="Email" required>
+
+<input type="password" id="password" placeholder="Password" required>
+
+<button type="submit" class="auth-btn" id="submitBtn">
+Login
+</button>
+
+</form>
+
+<div class="toggle-link" id="toggleText">
+Don't have an account? Sign Up
+</div>
+
+</div>
+
+<script type="module">
+
+import "./toast.js";
+
+import { auth, db } from "./firebase-config.js";
+
+import {
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+updateProfile,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+import {
+doc,
+setDoc,
+getDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+
+let isLogin = true;
+
+const title = document.getElementById("title");
+const username = document.getElementById("username");
+const button = document.getElementById("submitBtn");
+const toggle = document.getElementById("toggleText");
+
+
+toggle.addEventListener("click", ()=>{
+
+    isLogin = !isLogin;
+
+    if(isLogin){
+
+        title.innerText = "Login";
+        username.style.display = "none";
+        button.innerText = "Login";
+        toggle.innerText = "Don't have an account? Sign Up";
+
+    }
+
+    else{
+
+        title.innerText = "Sign Up";
+        username.style.display = "block";
+        button.innerText = "Sign Up";
+        toggle.innerText = "Already have an account? Login";
+
+    }
+
+});
+
+
+const authForm = document.getElementById("authForm");
+
+authForm.addEventListener("submit", async (e)=>{
+
+    e.preventDefault();
+
+    const email =
+    document.getElementById("email").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    const userNameValue =
+    username.value;
+
+    const originalBtnText = button.textContent;
+    button.disabled = true;
+    button.textContent = isLogin ? "Logging in..." : "Signing up...";
+
+    try{
+
+        if(isLogin){
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            window.location.href = "index.html";
+
+        }
+
+        else{
+
+            const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            if(userNameValue){
+
+                await updateProfile(
+                    userCredential.user,
+                    {
+                        displayName:userNameValue
+                    }
+                );
+
+            }
+
+            // Keep the await: without it the redirect below cuts the save off halfway
+            try {
+                await setDoc(doc(db, "Users", userCredential.user.uid), {
+                    name: userNameValue || "",
+                    email: email,
+                    joinedAt: serverTimestamp(),
+                    banned: false
+                });
+            } catch (err) {
+                console.error("Could not save user record:", err);
+            }
+
+            window.location.href = "index.html";
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        if(error.code === "auth/email-already-in-use"){
+
+            alert("Email already registered.");
+
+        }
+
+        else if(error.code === "auth/invalid-credential"){
+
+            alert("Invalid email or password.");
+
+        }
+
+        else if(error.code === "auth/weak-password"){
+
+            alert("Password must be at least 6 characters.");
+
+        }
+
+        else{
+
+            alert(error.message);
+
+        }
+
+        button.disabled = false;
+        button.textContent = originalBtnText;
+
+    }
+
+});
+</script>
+
+</body>
+</html>

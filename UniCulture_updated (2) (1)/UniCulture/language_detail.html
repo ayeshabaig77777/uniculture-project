@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Language Details | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+<style>
+    /* ===========================
+   LANGUAGE DETAIL PAGE
+=========================== */
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7f2;
+color:#333;
+}
+
+/* HERO */
+
+.lang-hero{
+    background: #24462b;
+    background-color:#2d5a27;
+    background-image:url(images/loading-language.jpg);
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px 0;
+    z-index: 1;
+}
+
+.lang-hero::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+.hero-overlay{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    width:100%;
+    margin:auto;
+    padding:0 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.hero-left{
+    flex:1;
+    max-width:650px;
+    color:white;
+}
+
+.hero-badge{
+display:inline-block;
+background:#5b8c45;
+padding:8px 18px;
+border-radius:50px;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.hero-left h1{
+    font-size:58px;
+    font-weight:800;
+    line-height:1.1;
+}
+
+.hero-left h3{
+    font-size:30px;
+    font-weight:500;
+    color:#FFD56A;
+    margin-bottom:25px;
+}
+
+.hero-left p{
+    font-size:18px;
+    line-height:1.7;
+    max-width:550px;
+}
+
+.hero-buttons{
+display:flex;
+gap:15px;
+}
+
+.hero-btn,
+.hero-btn-outline{
+padding:14px 28px;
+border-radius:12px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.hero-btn{
+background:#5b8c45;
+color:#fff;
+}
+
+.hero-btn:hover{
+background:#476f35;
+}
+.hero-btn-outline{
+border:2px solid white;
+color:white;
+}
+.hero-btn-outline:hover{
+background:white;
+color:#2d5a27;
+}
+
+/* RIGHT */
+
+.hero-right{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.language-script-card{
+    width:190px;
+    height:190px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(16px);
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+}
+
+.language-script-card h2{
+    margin:0;
+    font-size:52px;
+    text-align:center;
+    color:white;
+    line-height:1;
+}
+
+.language-script-card span{
+    margin-top:12px;
+    font-size:15px;
+    text-align:center;
+    padding:0 10px;
+    color:#eee;
+}
+
+/* MAIN */
+
+.lang-container{
+    max-width:1200px;
+    margin: 40px auto 80px;
+    padding:0 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.lang-card{
+background:white;
+padding:45px;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.08);
+}
+
+.section-title{
+margin-bottom:15px;
+}
+
+.section-title h2{
+font-size:34px;
+margin-bottom:10px;
+color:#2d5a27;
+}
+
+.section-title p{
+color:#666;
+font-size:17px;
+
+}
+
+#description{
+    margin:0 0 30px;
+}
+
+/* ===========================
+   QUICK FACTS
+=========================== */
+
+.quick-facts{
+    display: grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.fact-card{
+background:#fff;
+border:1px solid #edf1ea;
+border-radius:18px;
+padding:28px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.06);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.fact-icon{
+font-size:34px;
+margin-bottom:15px;
+}
+
+.fact-card h4{
+margin:10px 0;
+font-size:18px;
+color:#2d5a27;
+}
+
+.fact-card p{
+margin:0;
+font-size:17px;
+color:#555;
+line-height:1.6;
+}
+
+/* ===========================
+   CONTENT SECTIONS
+=========================== */
+
+.content-section{
+margin-top:55px;
+}
+
+.section-header{
+font-size:28px;
+color:#2d5a27;
+margin-bottom:20px;
+padding-bottom:12px;
+border-bottom:none;
+}
+
+.content-text{
+font-size:17px;
+line-height:1.9;
+color:#444;
+}
+
+/* ===========================
+   LANGUAGE CHARACTERISTICS
+=========================== */
+
+.characteristics-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+margin-top:25px;
+}
+
+.character-card{
+background:#f8faf6;
+padding:25px;
+border-radius:18px;
+text-align:center;
+}
+
+.character-card h4{
+margin:0 0 12px;
+color:#2d5a27;
+}
+
+.character-card p{
+margin:0;
+line-height:1.7;
+}
+
+/* ===========================
+   GREETINGS
+=========================== */
+
+.greetings-table{
+margin-top:25px;
+border-radius:18px;
+overflow:hidden;
+border:1px solid #e8ece4;
+}
+
+.word-row{
+display:flex;
+justify-content:space-between;
+padding:18px 24px;
+background:white;
+border-bottom:1px solid #eef2ea;
+}
+
+.word-row:last-child{
+border-bottom:none;
+}
+
+.word-row span:first-child{
+font-weight:bold;
+color:#2d5a27;
+}
+
+.word-row span:last-child{
+font-weight:600;
+}
+
+/* ===========================
+   FUN FACT
+=========================== */
+
+.funfact-card{
+margin-top:60px;
+display:flex;
+gap:20px;
+align-items:flex-start;
+background:#eef7e8;
+padding:30px;
+border-left:6px solid #5b8c45;
+border-radius:20px;
+}
+
+.fun-icon{
+font-size:42px;
+}
+
+.funfact-card h3{
+margin:0 0 10px;
+color:#2d5a27;
+}
+
+.funfact-card p{
+margin:0;
+line-height:1.8;
+}
+
+/* ===========================
+   BACK BUTTON
+=========================== */
+
+.back-btn{
+display:inline-block;
+margin-top:45px;
+padding:15px 30px;
+background:#2d5a27;
+color:white;
+text-decoration:none;
+border-radius:12px;
+transition:.3s;
+}
+
+.back-btn:hover{
+background:#1f421b;
+transform:translateY(-3px);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.hero-overlay{
+flex-direction:column;
+text-align:center;
+}
+
+.hero-left p{
+margin:auto;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+    flex-wrap:wrap;
+}
+
+.language-script-card{
+margin-top:20px;
+}
+
+.lang-card{
+padding:28px;
+}
+
+.hero-left h1{
+font-size:42px;
+}
+
+}
+
+@media(max-width:600px){
+
+.lang-hero{
+height:auto;
+padding:70px 0;
+}
+
+.hero-left h1{
+font-size:34px;
+}
+
+.hero-left h3{
+font-size:20px;
+}
+
+.hero-left p{
+font-size:16px;
+}
+
+.section-title h2{
+font-size:28px;
+}
+
+.section-header{
+font-size:24px;
+}
+
+.word-row{
+padding:15px;
+font-size:15px;
+}
+
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+html, body{
+    overflow-x:hidden;
+}
+
+/* ===========================
+   LEARN THIS LANGUAGE
+=========================== */
+
+.learn-search-wrap{
+    position:relative;
+    margin-bottom:30px;
+}
+
+.learn-search{
+    width:100%;
+    box-sizing:border-box;
+    padding:16px 20px;
+    font-size:16px;
+    border:2px solid #dfe8d9;
+    border-radius:14px;
+    outline:none;
+    transition:.25s;
+    font-family:inherit;
+}
+
+.learn-search:focus{
+    border-color:#5b8c45;
+    box-shadow:0 0 0 4px rgba(91,140,69,.12);
+}
+
+.learn-search-count{
+    display:block;
+    margin-top:8px;
+    font-size:14px;
+    color:#888;
+}
+
+.learn-empty{
+    text-align:center;
+    color:#888;
+    padding:30px;
+    font-size:16px;
+}
+
+.learn-block{
+    margin-top:38px;
+}
+
+.learn-subheading{
+    font-size:22px;
+    color:#2d5a27;
+    margin-bottom:18px;
+}
+
+/* Greetings / Words cards */
+
+.learn-card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:16px;
+}
+
+.learn-card{
+    background:#f8faf6;
+    border:1px solid #e8ece4;
+    border-radius:16px;
+    padding:18px 20px;
+    transition:.25s;
+}
+
+.learn-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+    border-color:#c9dcc1;
+}
+
+.learn-card-native{
+    font-size:22px;
+    font-weight:700;
+    color:#2d5a27;
+    direction:rtl;
+    margin-bottom:4px;
+}
+
+.learn-card-roman{
+    font-size:15px;
+    color:#777;
+    font-style:italic;
+    margin-bottom:6px;
+}
+
+.learn-card-english{
+    font-size:15px;
+    font-weight:600;
+    color:#333;
+}
+
+.learn-card-note{
+    margin-top:8px;
+    font-size:12px;
+    color:#a17b1c;
+    background:#fdf6e3;
+    padding:6px 10px;
+    border-radius:8px;
+    line-height:1.4;
+}
+
+.learn-card-footer{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* Numbers */
+
+.learn-number-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:14px;
+}
+
+.learn-number-card{
+    background:#eef7e8;
+    border:1px solid #dcebd2;
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+    transition:.25s;
+}
+
+.learn-number-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+}
+
+.learn-number-digit{
+    font-size:26px;
+    font-weight:800;
+    color:#5b8c45;
+}
+
+.learn-number-native{
+    font-size:20px;
+    font-weight:700;
+    color:#2d5a27;
+    direction:rtl;
+    margin-top:4px;
+}
+
+.learn-number-roman{
+    font-size:13px;
+    color:#777;
+    font-style:italic;
+    margin-top:2px;
+}
+
+.learn-number-english{
+    font-size:13px;
+    color:#555;
+    margin-top:4px;
+}
+
+/* Category tabs */
+
+.learn-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:22px;
+}
+
+.learn-tab{
+    padding:10px 18px;
+    border-radius:50px;
+    border:2px solid #dfe8d9;
+    background:white;
+    color:#2d5a27;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.learn-tab:hover{
+    border-color:#5b8c45;
+}
+
+.learn-tab.active{
+    background:#5b8c45;
+    border-color:#5b8c45;
+    color:white;
+}
+
+/* Phrases */
+
+.learn-phrase-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.learn-phrase-card{
+    background:#f8faf6;
+    border:1px solid #e8ece4;
+    border-radius:16px;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    transition:.25s;
+}
+
+.learn-phrase-card:hover{
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+    border-color:#c9dcc1;
+}
+
+.learn-phrase-text{
+    flex:1;
+    min-width:220px;
+}
+
+.learn-phrase-english{
+    font-size:15px;
+    color:#555;
+    margin-bottom:4px;
+}
+
+.learn-phrase-native{
+    font-size:19px;
+    font-weight:700;
+    color:#2d5a27;
+    direction:rtl;
+}
+
+.learn-phrase-roman{
+    font-size:14px;
+    color:#888;
+    font-style:italic;
+    margin-top:3px;
+}
+
+/* Copy + speak buttons */
+
+.learn-btn-row{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.learn-copy-btn,
+.learn-speak-btn{
+    background:white;
+    border:1px solid #d9e2d3;
+    color:#2d5a27;
+    font-size:13px;
+    padding:7px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+    white-space:nowrap;
+}
+
+.learn-copy-btn:hover,
+.learn-speak-btn:hover{
+    background:#5b8c45;
+    color:white;
+    border-color:#5b8c45;
+}
+
+.learn-copy-btn.copied{
+    background:#2d5a27;
+    color:white;
+    border-color:#2d5a27;
+}
+
+.learn-speak-btn.speaking{
+    background:#5b8c45;
+    color:white;
+    border-color:#5b8c45;
+    animation:learn-speak-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes learn-speak-pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.6; }
+}
+
+@media(max-width:600px){
+
+.learn-card-grid{
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+}
+
+.learn-number-grid{
+    grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+}
+
+.learn-phrase-card{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+}
+
+
+/* ===========================
+   LANGUAGE INFO CARDS
+   =========================== */
+.info-card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+    margin-top:22px;
+}
+
+.info-card{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    background:#f8faf6;
+    border:1px solid #e6eee1;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.info-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 28px rgba(0,0,0,.08);
+}
+
+.info-card-icon{
+    width:46px;
+    height:46px;
+    flex:0 0 46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eaf3e5;
+    border-radius:14px;
+    font-size:25px;
+}
+
+.info-card h3{
+    margin:2px 0 10px;
+    color:#2d5a27;
+    font-size:20px;
+}
+
+.info-card .content-text{
+    margin:0;
+    font-size:16px;
+    line-height:1.75;
+}
+
+.history-card-grid{
+    grid-template-columns:1fr;
+}
+
+@media(max-width:600px){
+    .info-card{
+        padding:20px;
+    }
+
+    .info-card-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo" alt="UniCulture Logo">
+
+<div>
+
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+
+<small class="tagline">Bringing Cultures Together</small>
+
+</div>
+
+</div>
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+
+</nav>
+
+<span id="auth-area"></span>
+
+</header>
+
+<!-- HERO -->
+
+<section class="lang-hero " id="hero">
+
+<div class="hero-overlay">
+
+<div class="hero-left">
+
+<div class="hero-badge">
+Regional Language of Pakistan
+</div>
+
+<h1 id="name"></h1>
+
+<h3 id="subtitle"></h3>
+
+</div>
+
+<div class="hero-right">
+
+<div class="language-script-card">
+
+<h2 id="native-script"></h2>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MAIN -->
+
+<section class="lang-container">
+
+<div class="lang-card">
+
+<div class="section-title">
+
+<h2 id="overview">Overview</h2>
+
+</div>
+
+<p id="description" class="content-text"></p>
+
+<!-- QUICK FACTS -->
+
+<div class="quick-facts">
+
+<div class="fact-card">
+
+<div class="fact-icon">📍</div>
+
+<h4>Province</h4>
+
+<p id="province"></p>
+
+</div>
+
+<div class="fact-card">
+
+<div class="fact-icon">✍</div>
+
+<h4>Writing Script</h4>
+
+<p id="script"></p>
+
+</div>
+
+<div class="fact-card">
+
+<div class="fact-icon">👥</div>
+
+<h4>Speakers</h4>
+
+<p id="speakers"></p>
+
+</div>
+
+<div class="fact-card">
+
+<div class="fact-icon">🌍</div>
+
+<h4>Language Family</h4>
+
+<p id="family"></p>
+
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="content-section">
+
+<h2 class="section-header">
+Historical Background
+</h2>
+
+<div class="info-card-grid history-card-grid">
+    <article class="info-card">
+        <div class="info-card-icon">📜</div>
+        <div>
+            <h3>Historical Background</h3>
+            <p id="history" class="content-text"></p>
+        </div>
+    </article>
+</div>
+
+</div>
+
+<!-- LEARN THIS LANGUAGE -->
+
+<div class="content-section" id="learn-section">
+
+<h2 class="section-header">
+🎓 Learn This Language
+</h2>
+
+<p class="content-text" style="margin-bottom:25px;">
+Basic vocabulary and everyday phrases to help you actually start speaking — not just read about the language.
+</p>
+
+<div class="learn-search-wrap">
+<input type="text" id="learnSearch" class="learn-search" placeholder="🔍 Search words or phrases...">
+<span id="learnSearchCount" class="learn-search-count"></span>
+</div>
+
+<div id="learnEmpty" class="learn-empty" style="display:none;">No matching words or phrases found.</div>
+
+<!-- Greetings -->
+<div class="learn-block" id="learnGreetingsBlock">
+<h3 class="learn-subheading">👋 Greetings</h3>
+<div id="learnGreetings" class="learn-card-grid"></div>
+</div>
+
+<!-- Numbers -->
+<div class="learn-block" id="learnNumbersBlock">
+<h3 class="learn-subheading">🔢 Numbers 1–10</h3>
+<div id="learnNumbers" class="learn-number-grid"></div>
+</div>
+
+<!-- Common Words -->
+<div class="learn-block" id="learnWordsBlock">
+<h3 class="learn-subheading">🗣 Common Words</h3>
+
+<div id="learnCategoryTabs" class="learn-tabs"></div>
+
+<div id="learnWords" class="learn-card-grid"></div>
+</div>
+
+<!-- Phrases -->
+<div class="learn-block" id="learnPhrasesBlock">
+<h3 class="learn-subheading">💬 Common Phrases</h3>
+<div id="learnPhrases" class="learn-phrase-list"></div>
+</div>
+
+<p id="learnUnavailable" class="content-text" style="display:none;">
+Learning content for this language hasn't been added yet — check back soon!
+</p>
+
+</div>
+
+<!-- LITERATURE -->
+
+<div class="content-section">
+
+<h2 class="section-header">
+Literature & Literary Figures
+</h2>
+
+<div class="info-card-grid literature-card-grid">
+
+    <article class="info-card">
+        <div class="info-card-icon">📚</div>
+        <div>
+            <h3>Literature</h3>
+            <p id="literature" class="content-text"></p>
+        </div>
+    </article>
+
+    <article class="info-card">
+        <div class="info-card-icon">✍️</div>
+        <div>
+            <h3>Literary Figures</h3>
+            <p id="people" class="content-text"></p>
+        </div>
+    </article>
+
+</div>
+
+</div>
+
+<!-- CULTURE -->
+
+<div class="content-section">
+
+<h2 class="section-header">
+Culture & Traditions
+</h2>
+
+<div class="info-card-grid culture-card-grid">
+
+    <article class="info-card">
+        <div class="info-card-icon">🎎</div>
+        <div>
+            <h3>Practices</h3>
+            <p id="practice" class="content-text"></p>
+        </div>
+    </article>
+
+    <article class="info-card">
+        <div class="info-card-icon">🍲</div>
+        <div>
+            <h3>Traditional Food</h3>
+            <p id="food" class="content-text"></p>
+        </div>
+    </article>
+
+    <article class="info-card">
+        <div class="info-card-icon">🎵</div>
+        <div>
+            <h3>Music & Dance</h3>
+            <p id="music" class="content-text"></p>
+        </div>
+    </article>
+
+</div>
+
+</div>
+
+<!-- FUN FACT -->
+
+<div class="funfact-card">
+
+<div class="fun-icon">
+💡
+</div>
+
+<div>
+
+<h3>Did You Know?</h3>
+
+<p id="funfact"></p>
+
+</div>
+
+</div>
+
+<a href="languages.html" class="back-btn">
+
+← Back to Languages
+
+</a>
+
+</div>
+
+</section>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<script type="module" src="language_detail.js"></script>
+
+</body>
+
+</html>

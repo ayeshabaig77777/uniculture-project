@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Planner | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="trip-planner.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+<div class="brand">
+<img src="images/logo1.png" class="logo">
+<div>
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+<small class="tagline">Bringing Cultures Together</small>
+</div>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+  <span id="auth-area"></span>
+</header>
+
+<main class="tp-page" id="tpPage">
+
+  <!-- HERO -->
+  <section class="tp-hero" id="tpHero">
+    <div class="tp-hero-in">
+      <div>
+        <span class="tp-badge">📍 Plan · Explore · Experience</span>
+        <h1>Trip Planner</h1>
+        <h2>Plan your perfect cultural journey across Pakistan</h2>
+        <p>From your starting point to your dream destination — we create a complete travel plan with the best routes, stays, budget and cultural stops, using only real places from the UniCulture library.</p>
+      </div>
+      <div class="tp-hero-region"><em id="tpHeroRegion">Pakistan</em><span>📍 Pakistan</span></div>
+    </div>
+  </section>
+
+  <div class="tp-wrap">
+
+    <!-- PLAN YOUR JOURNEY -->
+    <section class="tp-panel tp-top" id="tpPlanPanel">
+      <h3 class="tp-ptitle"><i>🧳</i> Plan Your Journey</h3>
+      <p class="tp-psub">Tell us where you're starting from, where you want to go and what kind of experience you're looking for.</p>
+
+      <form id="planForm" autocomplete="off">
+        <div class="tp-bar-row">
+
+          <div class="tp-ctl" id="tpFromCtl">
+            <span class="tp-fl">From</span>
+            <button type="button" class="tp-box" id="tpFromBtn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="tp-ico">📍</span><span class="tp-val" id="tpFromVal">Karachi, Sindh</span><span class="tp-caret">▾</span>
+            </button>
+            <div class="tp-menu" id="tpFromMenu" role="listbox">
+              <input type="search" class="tp-search" id="tpFromSearch" placeholder="Search Pakistani cities" aria-label="Search starting city">
+              <div id="tpFromList"></div>
+            </div>
+          </div>
+
+          <div class="tp-ctl">
+            <label class="tp-fl" for="tpRegion">To</label>
+            <div class="tp-selwrap">
+              <span class="tp-ico">🏔</span>
+              <select id="tpRegion" class="tp-box">
+                <option value="all">All Pakistan</option>
+                <option value="punjab">Punjab</option>
+                <option value="sindh">Sindh</option>
+                <option value="kpk">Khyber Pakhtunkhwa</option>
+                <option value="gilgit">Gilgit-Baltistan</option>
+                <option value="balochistan">Balochistan</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tp-ctl">
+            <span class="tp-fl">Travel dates</span>
+            <div class="tp-box tp-dates">
+              <span class="tp-ico">🗓</span>
+              <input type="date" id="tpStart" aria-label="Start date">
+              <b>–</b>
+              <input type="date" id="tpEnd" aria-label="End date">
+            </div>
+          </div>
+
+          <div class="tp-ctl" id="tpTravCtl">
+            <span class="tp-fl">Travellers</span>
+            <button type="button" class="tp-box" id="tpTravBtn" aria-haspopup="true" aria-expanded="false">
+              <span class="tp-ico">👥</span><span class="tp-val" id="tpTravVal">2 Adults, 0 Children</span><span class="tp-caret">▾</span>
+            </button>
+            <div class="tp-menu trav" id="tpTravMenu">
+              <div class="tp-trow"><div>Adults<small>Age 12+</small></div>
+                <div class="tp-step"><button type="button" data-t="adults" data-d="-1" aria-label="Fewer adults">−</button><b id="tpAdultsN">2</b><button type="button" data-t="adults" data-d="1" aria-label="More adults">+</button></div></div>
+              <div class="tp-trow"><div>Children<small>Under 12</small></div>
+                <div class="tp-step"><button type="button" data-t="children" data-d="-1" aria-label="Fewer children">−</button><b id="tpChildrenN">0</b><button type="button" data-t="children" data-d="1" aria-label="More children">+</button></div></div>
+              <button type="button" class="tp-done" id="tpTravDone">Done</button>
+            </div>
+          </div>
+
+          <button type="submit" class="tp-go" id="tpSubmit">🔍 Find My Journey</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- INTERESTS -->
+    <section class="tp-panel" id="tpIntPanel">
+      <h3 class="tp-ptitle"><i>🎭</i> Cultural Interests</h3>
+      <p class="tp-psub">What type of experiences are you interested in?</p>
+      <div class="tp-ints" id="tpInts" role="group" aria-label="Cultural interests">
+        <label class="tp-int"><input type="checkbox" name="interest" value="heritage" checked><span><b>🏛</b>Heritage</span></label>
+        <label class="tp-int"><input type="checkbox" name="interest" value="food"><span><b>🍛</b>Food</span></label>
+        <label class="tp-int"><input type="checkbox" name="interest" value="museums"><span><b>🖼</b>Museums</span></label>
+        <label class="tp-int"><input type="checkbox" name="interest" value="festivals"><span><b>🎉</b>Festivals</span></label>
+        <label class="tp-int"><input type="checkbox" name="interest" value="handicrafts"><span><b>🧶</b>Handicrafts</span></label>
+        <label class="tp-int"><input type="checkbox" name="interest" value="nature" checked><span><b>🏔</b>Nature</span></label>
+      </div>
+      <p class="tp-hint" id="tpHint"></p>
+
+      <div class="tp-style">
+        <div>
+          <span class="tp-fl">Travel pace</span>
+          <div class="tp-pills" role="radiogroup" aria-label="Travel pace">
+            <label class="tp-pill"><input type="radio" name="pace" value="2"><span>Relaxed<small>2/day</small></span></label>
+            <label class="tp-pill"><input type="radio" name="pace" value="3" checked><span>Balanced<small>3/day</small></span></label>
+            <label class="tp-pill"><input type="radio" name="pace" value="4"><span>Packed<small>4/day</small></span></label>
+          </div>
+        </div>
+        <div>
+          <label class="tp-fl" for="tpBudget">Budget level</label>
+          <div class="tp-selwrap">
+            <span class="tp-ico">💰</span>
+            <select id="tpBudget" class="tp-box">
+              <option value="economy">Economy</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfortable">Comfortable</option>
+            </select>
+          </div>
+        </div>
+        <p class="tp-hint" id="tpBudgetHint" style="margin:0;flex:1;min-width:200px;"></p>
+      </div>
+    </section>
+
+    <div class="tp-error" id="tpError" role="alert"></div>
+    <div class="tp-loading" id="tpLoading"><div class="tp-spinner"></div><p id="tpLoadingText">Picking destinations…</p></div>
+
+    <!-- RESULT -->
+    <div id="tpResult" style="display:none;">
+
+      <div class="tp-note" id="tpNote"></div>
+
+      <section class="tp-panel">
+        <h3 class="tp-ptitle">Your Journey at a Glance</h3>
+        <p class="tp-psub" id="tpSummary"></p>
+        <div class="tp-glance" id="tpGlance"></div>
+      </section>
+
+      <div class="tp-two tp-even">
+        <section class="tp-panel">
+          <h3 class="tp-ptitle">Recommended Travel Options</h3>
+          <p class="tp-psub" id="tpOptSub">Compare different ways to reach your first stop.</p>
+          <div class="tp-tabs" id="tpOptTabs" role="tablist">
+            <button type="button" class="tp-tab on" data-f="all">All</button>
+            <button type="button" class="tp-tab" data-f="flight">Flight</button>
+            <button type="button" class="tp-tab" data-f="road">Road</button>
+            <button type="button" class="tp-tab" data-f="train">Train</button>
+            <button type="button" class="tp-tab" data-f="bus">Bus</button>
+          </div>
+          <div class="tp-opts" id="tpOpts"></div>
+          <p class="tp-fine" id="tpOptFine"></p>
+        </section>
+
+        <section class="tp-panel">
+          <h3 class="tp-ptitle">Your Route Map</h3>
+          <div class="tp-map" id="tpMap">Loading map…</div>
+          <div class="tp-legend">
+            <span style="--lc:#888">Start → first stop</span>
+            <span style="--lc:#15603d">Your route</span>
+            <span style="--lc:#d97706">Stops</span>
+          </div>
+          <ul class="tp-route-days" id="tpRouteDays"></ul>
+        </section>
+      </div>
+
+      <section class="tp-panel">
+        <h3 class="tp-ptitle" id="tpItinTitle">Your Itinerary</h3>
+        <div class="tp-days" id="tpDaysWrap"></div>
+      </section>
+
+      <section class="tp-panel">
+        <h3 class="tp-ptitle">Popular Attractions</h3>
+        <div id="tpAttr" class="tp-attr-grid"></div>
+      </section>
+
+      <div class="tp-two tp-even tp-r2">
+        <section class="tp-panel">
+          <h3 class="tp-ptitle">Where to Stay</h3>
+          <p class="tp-psub">Area suggestions with planning price ranges, not individual hotels or live rates.</p>
+          <div class="tp-stays" id="tpStays"></div>
+        </section>
+
+        <section class="tp-panel">
+          <h3 class="tp-ptitle">💰 Estimated Budget</h3>
+          <div class="tp-budget-top" id="tpBudgetTop"></div>
+          <div id="tpBudgetRows"></div>
+          <p class="tp-fine" id="tpBudgetFine"></p>
+        </section>
+      </div>
+
+      <section class="tp-panel" id="tpExplorePanel" style="display:none;">
+        <h3 class="tp-ptitle">More for your interests</h3>
+        <p class="tp-psub">These experiences have their own pages on UniCulture.</p>
+        <div class="tp-explore" id="tpExplore"></div>
+      </section>
+
+      <div class="tp-tipsbar">
+        <strong>💡 Travel Tips</strong>
+        <span>👟 Carry comfortable shoes</span>
+        <span>💧 Stay hydrated</span>
+        <span>🤝 Respect local culture</span>
+        <span>📷 Keep your camera ready!</span>
+      </div>
+
+      <div class="tp-cta" id="tpCta">
+        <div><h4 id="tpCtaTitle">Ready to explore?</h4><p>Save your trip, get a detailed PDF or share it with your travel buddies.</p></div>
+        <div class="tp-cta-b">
+          <button type="button" id="tpSave">🔖 Save Itinerary</button>
+          <button type="button" id="tpPrint">⬇ Download PDF</button>
+          <button type="button" id="tpShare">↗ Share Trip</button>
+          <button type="button" class="pri" id="tpAgain">＋ Plan Another Trip</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div class="tp-toast" id="tpToast" role="status"></div>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<!-- LOGIN / SIGNUP POPUP -->
+
+<div class="popup-overlay" id="authPopup">
+
+  <div class="popup-container">
+
+    <!-- LEFT IMAGE -->
+
+    <div class="popup-left">
+      <img src="images/login image.png">
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="popup-right">
+
+      <!-- CLOSE BUTTON -->
+
+      <span class="close-btn" id="closePopup">
+        &times;
+      </span>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button class="tab" id="signupTab">
+          Signup
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Login
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm" style="display:none;">
+
+        <div class="input-group">
+          <input type="text"
+          placeholder="Full Name"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Create Account
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="trip-planner.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Region Details | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+<style>
+    /* ===========================
+   REGION DETAIL PAGE
+=========================== */
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7f2;
+color:#333;
+}
+
+/* HERO */
+
+.rd-hero{
+    background: linear-gradient(135deg, #265430);
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 0;
+    z-index: 1;
+}
+
+.rd-hero-overlay{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    width:100%;
+    margin:auto;
+    padding:0 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.rd-hero-left{
+    flex:1;
+    max-width:680px;
+    color:white;
+}
+
+.rd-badge{
+display:inline-block;
+background:#5b8c45;
+padding:8px 18px;
+border-radius:50px;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.rd-hero-left h1{
+    font-size:52px;
+    font-weight:800;
+    line-height:1.1;
+    margin:0;
+}
+
+.rd-hero-left h3{
+    font-size:26px;
+    font-weight:500;
+    color:#FFD56A;
+    margin:8px 0 20px;
+}
+
+.rd-hero-left p{
+    font-size:17px;
+    line-height:1.7;
+    max-width:560px;
+    margin:0;
+}
+
+/* RIGHT — capital / stat chip */
+
+.rd-hero-right{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.rd-capital-card{
+    width:180px;
+    height:180px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(16px);
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:15px;
+}
+
+.rd-capital-card span.rd-capital-label{
+    font-size:13px;
+    color:#eee;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+}
+
+.rd-capital-card h2{
+    margin:8px 0 0;
+    font-size:24px;
+    color:white;
+    line-height:1.2;
+}
+
+/* MAIN CARD */
+
+.rd-container{
+    max-width:1200px;
+    margin: 40px auto 60px;
+    padding:0 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.rd-card{
+background:white;
+padding:45px;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.08);
+}
+
+.rd-section-title{
+margin-bottom:35px;
+}
+
+.rd-section-title h2{
+font-size:32px;
+margin-bottom:10px;
+color:#2d5a27;
+}
+
+/* QUICK FACTS */
+
+.rd-quick-facts{
+    display: grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.rd-fact-card{
+background:#fff;
+border:1px solid #edf1ea;
+border-radius:18px;
+padding:28px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.06);
+transition:.3s;
+}
+
+.rd-fact-card:hover{
+transform:translateY(-8px);
+box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.rd-fact-icon{
+font-size:34px;
+margin-bottom:15px;
+}
+
+.rd-fact-card h4{
+margin:10px 0;
+font-size:18px;
+color:#2d5a27;
+}
+
+.rd-fact-card p{
+margin:0;
+font-size:17px;
+color:#555;
+line-height:1.6;
+}
+
+/* CONTENT SECTIONS */
+
+.rd-content-section{
+margin-top:55px;
+}
+
+.rd-section-header{
+font-size:28px;
+color:#2d5a27;
+margin-bottom:20px;
+padding-bottom:12px;
+border-bottom:2px solid #dfe8d9;
+}
+
+.rd-content-text{
+font-size:17px;
+line-height:1.9;
+color:#444;
+}
+
+/* FAMOUS FOR TAGS */
+
+.rd-tags{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:25px;
+}
+
+.rd-tags span{
+background:#eef7e8;
+color:#2d5a27;
+padding:10px 20px;
+border-radius:50px;
+font-weight:600;
+font-size:15px;
+}
+
+/* FUN FACT */
+
+.rd-funfact-card{
+margin-top:60px;
+display:flex;
+gap:20px;
+align-items:flex-start;
+background:#eef7e8;
+padding:30px;
+border-left:6px solid #5b8c45;
+border-radius:20px;
+}
+
+.rd-fun-icon{
+font-size:42px;
+}
+
+.rd-funfact-card h3{
+margin:0 0 10px;
+color:#2d5a27;
+}
+
+.rd-funfact-card p{
+margin:0;
+line-height:1.8;
+}
+
+/* BACK BUTTON */
+
+.rd-back-btn{
+display:inline-block;
+margin-top:45px;
+padding:15px 30px;
+background:#2d5a27;
+color:white;
+text-decoration:none;
+border-radius:12px;
+transition:.3s;
+}
+
+.rd-back-btn:hover{
+background:#1f421b;
+transform:translateY(-3px);
+}
+
+/* PLACES TO VISIT — "View Details" link styled like a button */
+
+.tour-card-details-btn{
+  margin: 0 14px 16px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: #265430;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  align-self: flex-start;
+  transition: 0.3s;
+}
+
+.tour-card-details-btn:hover{
+  background: #1e4426;
+}
+
+/* PLACES TO VISIT — compact grid, image + name */
+
+.rd-places-grid{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.rd-place-card{
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rd-place-card img{
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+  transition: .3s;
+}
+
+.rd-place-card img:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.16);
+}
+
+.rd-place-card span{
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d5a27;
+  line-height: 1.3;
+}
+
+@media(max-width:900px){
+  .rd-places-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(max-width:600px){
+  .rd-places-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* CATEGORY SECTIONS HEADER (below the main card) */
+
+.rd-explore-heading{
+    max-width:1150px;
+    margin:0 auto;
+    padding:0 30px;
+    text-align:center;
+}
+
+.rd-explore-heading h2{
+    font-size:30px;
+    color:#2d5a27;
+    margin-bottom:8px;
+}
+
+.rd-explore-heading p{
+    color:#666;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.rd-hero-overlay{
+flex-direction:column;
+text-align:center;
+}
+
+.rd-hero-left p{
+margin:auto;
+}
+
+.rd-capital-card{
+margin-top:20px;
+}
+
+.rd-card{
+padding:28px;
+}
+
+.rd-hero-left h1{
+font-size:38px;
+}
+
+.rd-tags{
+justify-content:center;
+}
+
+}
+
+@media(max-width:600px){
+
+.rd-hero{
+height:auto;
+padding:60px 0;
+}
+
+.rd-hero-left h1{
+font-size:30px;
+}
+
+.rd-hero-left h3{
+font-size:18px;
+}
+
+.rd-hero-left p{
+font-size:15px;
+}
+
+.rd-section-title h2{
+font-size:26px;
+}
+
+.rd-section-header{
+font-size:22px;
+}
+
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+html, body{
+    overflow-x:hidden;
+}
+
+</style>
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo" alt="UniCulture Logo">
+
+<div>
+
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+
+<small class="tagline">Bringing Cultures Together</small>
+
+</div>
+
+</div>
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+
+</nav>
+
+<span id="auth-area"></span>
+
+</header>
+
+<!-- HERO -->
+
+<section class="rd-hero" id="regionHero">
+
+<div class="rd-hero-overlay">
+
+<div class="rd-hero-left">
+
+<div class="rd-badge" id="regionBadge">Province of Pakistan</div>
+
+<h1 id="regionTitle">Region</h1>
+
+<h3 id="regionTagline"></h3>
+
+<p id="regionOverview">Loading...</p>
+
+</div>
+
+<div class="rd-hero-right">
+
+<div class="rd-capital-card">
+
+<span class="rd-capital-label">Capital</span>
+
+<h2 id="regionCapital"></h2>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MAIN DETAIL CARD -->
+
+<section class="rd-container">
+
+<div class="rd-card">
+
+<div class="rd-section-title">
+
+<h2>Overview</h2>
+
+</div>
+
+<p id="regionDescription" class="rd-content-text"></p>
+
+<!-- QUICK FACTS -->
+
+<div class="rd-quick-facts">
+
+<div class="rd-fact-card">
+
+<div class="rd-fact-icon">🏙</div>
+
+<h4>Capital</h4>
+
+<p id="factCapital"></p>
+
+</div>
+
+<div class="rd-fact-card">
+
+<div class="rd-fact-icon">👥</div>
+
+<h4>Population</h4>
+
+<p id="factPopulation"></p>
+
+</div>
+
+<div class="rd-fact-card">
+
+<div class="rd-fact-icon">🗣</div>
+
+<h4>Languages</h4>
+
+<p id="factLanguages"></p>
+
+</div>
+
+<div class="rd-fact-card">
+
+<div class="rd-fact-icon">📐</div>
+
+<h4>Area</h4>
+
+<p id="factArea"></p>
+
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="rd-content-section">
+
+<h2 class="rd-section-header">
+Historical Background
+</h2>
+
+<p id="regionHistory" class="rd-content-text"></p>
+
+</div>
+
+<!-- CULTURE -->
+
+<div class="rd-content-section">
+
+<h2 class="rd-section-header">
+Culture &amp; Traditions
+</h2>
+
+<p id="regionCulture" class="rd-content-text"></p>
+
+</div>
+
+<!-- PLACES TO VISIT -->
+
+<div class="rd-content-section">
+
+<h2 class="rd-section-header">
+Places to Visit
+</h2>
+
+<div class="rd-places-grid" id="regionPlacesWrap"></div>
+
+</div>
+
+<!-- FUN FACT -->
+
+<div class="rd-funfact-card" id="regionFunfactCard" style="display:none;">
+
+<div class="rd-fun-icon">
+💡
+</div>
+
+<div>
+
+<h3>Did You Know?</h3>
+
+<p id="regionFunfact"></p>
+
+</div>
+
+</div>
+
+<a href="cultural-map.html" class="rd-back-btn">
+
+← Back to Cultural Map
+
+</a>
+
+</div>
+
+</section>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<!-- LOGIN / SIGNUP POPUP -->
+
+<div class="popup-overlay" id="authPopup">
+
+  <div class="popup-container">
+
+    <!-- LEFT IMAGE -->
+
+    <div class="popup-left">
+      <img src="images/login image.png">
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="popup-right">
+
+      <!-- CLOSE BUTTON -->
+
+      <span class="close-btn" id="closePopup">
+        &times;
+      </span>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button class="tab" id="signupTab">
+          Signup
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Login
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm" style="display:none;">
+
+        <div class="input-group">
+          <input type="text"
+          placeholder="Full Name"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Create Account
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module" src="region-detail.js"></script>
+</body>
+
+</html>

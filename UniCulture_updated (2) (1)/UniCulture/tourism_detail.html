@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tourism Detail | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=7">
+
+
+<style>
+
+/* =========================
+   TOURISM DETAIL PAGE
+========================= */
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f7f2;
+color:#333;
+}
+
+
+/* HERO */
+
+.lang-hero{
+min-height:180px;
+background:#2d5a27;
+display:flex;
+align-items:center;
+position:relative;
+overflow:hidden;
+}
+.lang-hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+}
+.hero-overlay{
+position:relative;
+z-index:2;
+max-width:1200px;
+width:100%;
+margin:auto;
+padding:40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+.hero-left{
+color:white;
+max-width:650px;
+}
+.hero-badge{
+display:inline-block;
+background:#5b8c45;
+padding:8px 18px;
+border-radius:50px;
+font-size:14px;
+margin-bottom:20px;
+}
+.hero-left h1{
+font-size:58px;
+margin:0 0 10px;
+font-weight:800;
+}
+.hero-left h3{
+font-size:30px;
+color:#FFD56A;
+margin:0 0 20px;
+}
+.hero-left p{
+font-size:18px;
+line-height:1.7;
+}
+.hero-right{
+display:flex;
+justify-content:center;
+}
+.language-script-card{
+width:190px;
+height:190px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:white;
+border:1px solid rgba(255,255,255,.3);
+}
+
+.language-script-card h2{
+font-size:55px;
+margin:0;
+}
+
+.language-script-card span{
+margin-top:15px;
+}
+
+
+/* MAIN */
+
+.lang-container{
+max-width:1200px;
+margin:40px auto 80px;
+padding:0 25px;
+}
+
+.lang-card{
+background:white;
+padding:45px;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.08);
+}
+
+.section-title h2{
+font-size:34px;
+color:#2d5a27;
+margin-bottom:10px;
+}
+
+.section-title p{
+color:#666;
+font-size:17px;
+}
+
+.content-text{
+font-size:17px;
+line-height:1.9;
+color:#444;
+}
+
+
+/* QUICK FACTS */
+
+.quick-facts{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin:40px 0;
+}
+
+.fact-card{
+background:white;
+border:1px solid #edf1ea;
+border-radius:18px;
+padding:25px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.06);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+}
+
+.fact-icon{
+font-size:35px;
+margin-bottom:15px;
+}
+
+.fact-card h4{
+color:#2d5a27;
+font-size:18px;
+}
+
+.fact-card p{
+color:#555;
+}
+
+
+/* SECTIONS */
+
+.content-section{
+margin-top:55px;
+}
+
+.section-header{
+font-size:28px;
+color:#2d5a27;
+border-bottom:2px solid #dfe8d9;
+padding-bottom:12px;
+}
+
+
+/* VISITOR */
+
+.characteristics-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:25px;
+}
+
+.character-card{
+background:#f8faf6;
+padding:25px;
+border-radius:18px;
+text-align:center;
+}
+
+.character-card h4{
+color:#2d5a27;
+}
+
+
+/* NEARBY ATTRACTIONS */
+
+.nearby-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-top:25px;
+}
+
+.nearby-card{
+display:block;
+text-decoration:none;
+background:white;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.nearby-card:hover{
+transform:translateY(-6px) scale(1.02);
+box-shadow:0 16px 30px rgba(0,0,0,.14);
+}
+
+.nearby-card img{
+width:100%;
+height:130px;
+object-fit:cover;
+display:block;
+transition:transform .5s ease;
+}
+
+.nearby-card:hover img{
+transform:scale(1.08);
+}
+
+.nearby-card span{
+display:block;
+padding:12px 14px;
+color:#2d5a27;
+font-weight:600;
+font-size:15px;
+}
+
+
+/* CULTURE OF THE AREA */
+
+.culture-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.culture-chip{display:inline-block;padding:6px 14px;border-radius:50px;font-size:12.5px;font-weight:700;white-space:nowrap;}
+.culture-chip.draft{background:#fff4d6;color:#8a6410;}
+.culture-chip.verified{background:#e3f4dc;color:#2d5a27;}
+.culture-tagline{margin:10px 0 0;color:#666;font-size:16px;line-height:1.7;}
+.culture-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:24px;}
+.culture-card{background:#f8faf6;border:1px solid #edf1ea;border-radius:18px;padding:22px 24px;transition:.3s;}
+.culture-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.08);}
+.culture-card h3{margin:0 0 12px;font-size:19px;color:#2d5a27;display:flex;align-items:center;gap:10px;}
+.culture-intro{margin:0 0 12px;color:#555;line-height:1.7;font-size:15px;}
+.culture-item{padding:10px 0;border-top:1px dashed #dfe8d9;}
+.culture-item:first-of-type{border-top:none;padding-top:0;}
+.culture-item strong{display:block;color:#2d5a27;font-size:15px;margin-bottom:3px;}
+.culture-item p{margin:0;color:#555;line-height:1.7;font-size:14.5px;}
+.culture-foot{margin-top:24px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:flex-start;}
+.culture-sources{font-size:13px;color:#777;line-height:1.8;max-width:760px;}
+.culture-sources a{color:#2d5a27;}
+.culture-suggest{display:inline-block;padding:11px 22px;border-radius:50px;border:1px solid #2d5a27;color:#2d5a27;text-decoration:none;font-weight:700;font-size:14px;transition:.3s;white-space:nowrap;}
+.culture-suggest:hover{background:#2d5a27;color:#fff;}
+/* culture tiles (v2) */
+.culture-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-top:22px;}
+.culture-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:22px 12px;border-radius:20px;color:#fff;text-decoration:none;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.14);transition:transform .25s,box-shadow .25s;}
+.culture-tile:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 16px 28px rgba(0,0,0,.22);}
+.culture-tile .ic{font-size:38px;line-height:1;margin-bottom:6px;}
+.culture-tile b{font-size:14.5px;}
+.culture-tile small{font-size:12px;opacity:.88;}
+.culture-cta{display:inline-block;padding:12px 24px;border-radius:50px;background:#2d5a27;color:#fff !important;text-decoration:none;font-weight:700;font-size:14.5px;transition:.3s;}
+.culture-cta:hover{background:#3d7a35;transform:translateY(-2px);}
+body.dark-mode .culture-cta{background:#8fd67a;color:#16210f !important;}
+@media(max-width:900px){.culture-grid{grid-template-columns:1fr;}}
+
+/* THINGS TO DO */
+
+.activities-list{
+list-style:none;
+margin:25px 0 0;
+padding:0;
+display:grid;
+gap:14px;
+}
+
+.activities-list li{
+display:flex;
+align-items:flex-start;
+gap:14px;
+background:#f8faf6;
+border:1px solid #edf1ea;
+border-radius:14px;
+padding:16px 20px;
+font-size:16px;
+color:#444;
+transition:.3s;
+}
+
+.activities-list li:hover{
+transform:translateX(6px);
+border-color:#c9dcc0;
+background:#f1f7ec;
+}
+
+.activities-list li::before{
+content:"✓";
+flex-shrink:0;
+width:26px;
+height:26px;
+border-radius:50%;
+background:#5b8c45;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:13px;
+font-weight:700;
+}
+
+
+/* FUN FACT */
+
+.funfact-card{
+margin-top:60px;
+display:flex;
+gap:20px;
+align-items:center;
+background:#eef7e8;
+padding:30px;
+border-left:6px solid #5b8c45;
+border-radius:20px;
+}
+
+.fun-icon{
+font-size:40px;
+}
+
+.funfact-card h3{
+color:#2d5a27;
+}
+
+
+/* BUTTON */
+
+.back-btn{
+display:inline-block;
+margin-top:40px;
+padding:14px 30px;
+background:#2d5a27;
+color:white;
+text-decoration:none;
+border-radius:12px;
+transition:.3s;
+}
+
+.back-btn:hover{
+background:#1e4020;
+transform:translateX(-4px);
+}
+
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes heroFadeIn{
+from{ opacity:0; transform:translateY(-18px); }
+to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes fadeUp{
+from{ opacity:0; transform:translateY(28px); }
+to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes popIn{
+from{ opacity:0; transform:scale(.85); }
+to{ opacity:1; transform:scale(1); }
+}
+
+.hero-left{
+animation:heroFadeIn .7s ease both;
+}
+
+.hero-right{
+animation:popIn .7s ease .15s both;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(28px);
+transition:opacity .7s ease, transform .7s ease;
+}
+
+.reveal.in-view{
+opacity:1;
+transform:translateY(0);
+}
+
+.fact-card{
+opacity:0;
+animation:fadeUp .6s ease forwards;
+}
+
+.fact-card:nth-child(1){ animation-delay:.05s; }
+.fact-card:nth-child(2){ animation-delay:.15s; }
+.fact-card:nth-child(3){ animation-delay:.25s; }
+.fact-card:nth-child(4){ animation-delay:.35s; }
+
+.lang-card{
+animation:fadeUp .6s ease both;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-left, .hero-right, .fact-card, .lang-card, .reveal{
+    animation:none !important;
+    transition:none !important;
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
+
+
+@media(max-width:900px){
+
+.hero-overlay{
+flex-direction:column;
+text-align:center;
+}
+
+.quick-facts{
+grid-template-columns:repeat(2,1fr);
+}
+
+.characteristics-grid{
+grid-template-columns:1fr;
+}
+
+.nearby-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.hero-left h1{
+font-size:40px;
+}
+
+}
+
+
+@media(max-width:600px){
+
+.quick-facts{
+grid-template-columns:1fr;
+}
+
+.nearby-grid{
+grid-template-columns:1fr;
+}
+
+.lang-card{
+padding:25px;
+}
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+<script src="theme.js"></script>
+
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo">
+
+<div>
+
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+
+<small class="tagline">
+Bringing Cultures Together
+</small>
+
+</div>
+
+</div>
+
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+<a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+</nav>
+
+
+<span id="auth-area"></span>
+
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="lang-hero" id="hero">
+
+
+<div class="hero-overlay">
+
+
+<div class="hero-left">
+
+
+<div class="hero-badge">
+Pakistan Tourism
+</div>
+
+
+<h1 id="name"></h1>
+
+
+<h3 id="location2"></h3>
+
+
+<p>
+Discover the history, natural beauty and travel tips for this destination.
+</p>
+
+
+</div>
+
+
+
+<div class="hero-right">
+
+
+<div class="language-script-card">
+
+<h2>🧭</h2>
+
+<span id="typeBadge">Destination</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+<!-- MAIN CONTENT -->
+
+<section class="lang-container">
+
+<div class="lang-card">
+
+
+<div class="section-title">
+
+<h2>
+Overview
+</h2>
+
+
+</div>
+
+
+<p id="description" class="content-text"></p>
+
+
+<!-- QUICK FACTS -->
+<div class="quick-facts">
+
+
+<div class="fact-card">
+
+<div class="fact-icon">
+📍
+</div>
+
+<h4>
+Region
+</h4>
+
+<p id="location"></p>
+
+</div>
+
+
+
+<div class="fact-card">
+
+<div class="fact-icon">
+🏷
+</div>
+
+<h4>
+Type
+</h4>
+
+<p id="category2"></p>
+
+</div>
+
+
+
+<div class="fact-card">
+
+<div class="fact-icon">
+🌤
+</div>
+
+<h4>
+Best Time To Visit
+</h4>
+
+<p id="besttime"></p>
+
+</div>
+
+
+
+<div class="fact-card">
+
+<div class="fact-icon">
+🚗
+</div>
+
+<h4>
+How To Reach
+</h4>
+
+<p id="howtoreach"></p>
+
+</div>
+
+
+</div>
+
+
+<!-- HISTORY -->
+
+<div class="content-section reveal">
+
+
+<h2 class="section-header">
+Historical Background
+</h2>
+
+
+<p id="history" class="content-text"></p>
+
+
+</div>
+
+
+<!-- CULTURE OF THE AREA -->
+
+<div class="content-section reveal" id="cultureSection" style="display:none;">
+
+  <div class="culture-head">
+    <h2 class="section-header" id="cultureTitle" style="flex:1;min-width:240px;">Culture</h2>
+    <span class="culture-chip" id="cultureChip"></span>
+  </div>
+
+  <p class="culture-tagline" id="cultureTagline"></p>
+
+  <div class="culture-grid" id="cultureGrid"></div>
+
+  <div class="culture-foot">
+    <div class="culture-sources" id="cultureSources"></div>
+    <a href="contribute.html" class="culture-suggest">✍ Suggest a correction</a>
+  </div>
+
+</div>
+
+
+<!-- THINGS TO DO -->
+
+<div class="content-section reveal" id="activitiesSection" style="display:none;">
+
+
+<h2 class="section-header">
+Things To Do
+</h2>
+
+
+<ul class="activities-list" id="activitiesWrap"></ul>
+
+
+</div>
+
+
+<!-- VISITOR TIPS -->
+
+<div class="content-section reveal">
+
+
+<h2 class="section-header">
+Visitor Tips
+</h2>
+
+
+<div class="characteristics-grid">
+
+
+<div class="character-card">
+
+<h4>
+💡 Things To Know
+</h4>
+
+<p id="tips"></p>
+
+</div>
+
+
+<div class="character-card">
+
+<h4>
+🏙 Nearest City
+</h4>
+
+<p id="city"></p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- NEARBY ATTRACTIONS -->
+
+<div class="content-section reveal" id="nearbySection" style="display:none;">
+
+
+<h2 class="section-header">
+Nearby Attractions
+</h2>
+
+
+<div class="nearby-grid" id="nearbyWrap"></div>
+
+
+</div>
+
+
+<!-- FUN FACT -->
+
+<div class="funfact-card reveal">
+
+
+<div class="fun-icon">
+💡
+</div>
+
+
+<div>
+
+<h3>
+Did You Know?
+</h3>
+
+
+<p id="funfact"></p>
+
+
+</div>
+
+
+</div>
+
+
+<a href="tourism.html" class="back-btn">
+
+← Back to Tourism
+
+</a>
+
+
+</div>
+
+</section>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="tourism_detail.js"></script>
+
+
+
+</body>
+
+</html>

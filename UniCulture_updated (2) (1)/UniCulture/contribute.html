@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contribute | UniCulture</title>
+
+<link rel="stylesheet" href="style.css?v=4">
+
+</head>
+
+<body>
+<script src="theme.js"></script>
+
+<header class="navbar">
+
+<div class="brand">
+
+<img src="images/logo1.png" class="logo">
+
+<div>
+
+<span class="uni">Uni</span>
+<span class="culture">Culture</span><br>
+
+<small class="tagline">
+Bringing Cultures Together
+</small>
+
+</div>
+
+</div>
+
+<nav class="nav-links">
+
+<a href="index.html">Home</a>
+<div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+<a href="heritage.html">Heritage</a>
+<a href="cultural-map.html">Map</a>
+<a href="events.html">Events</a>
+<a href="tourism.html">Tourism</a>
+<a href="about.html">About</a>
+<a href="community.html">Community</a>
+<a href="contribute.html" class="contribute-btn protected-btn">
+        Contribute
+    </a>
+</nav>
+
+<span id="auth-area"></span>
+
+</header>
+
+
+<section class="about-hero">
+
+<div class="about-overlay">
+
+<h1>Share Your Contribution</h1>
+
+<p>
+Help preserve Pakistan's cultural heritage by
+sharing photographs and historical documents.
+</p>
+
+</div>
+
+</section>
+
+<section class="contribute-section">
+
+<div class="contribute-container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="contribute-form-box">
+
+        <h2>Share Your Contribution</h2>
+
+        <p>
+            Help preserve Pakistan's culture by contributing photos,
+            documents, traditions or historical information.
+        </p>
+
+        <form id="contributeForm">
+
+            <label>Contribution Type</label>
+
+            <select id="type" required>
+
+                <option value="">Select Type</option>
+
+                <option>Photo</option>
+
+                <option>Document</option>
+
+            </select>
+
+
+            <label>Title</label>
+
+            <input
+            type="text"
+            id="title"
+            placeholder="Contribution Title"
+            required>
+
+
+            <label>Description</label>
+
+            <textarea
+            id="description"
+            rows="5"
+            placeholder="Write your contribution..."
+            required></textarea>
+
+
+            <label>Region</label>
+
+            <select id="region" required>
+
+                <option value="">Select Region</option>
+
+                <option>Punjab</option>
+
+                <option>Sindh</option>
+
+                <option>Khyber Pakhtunkhwa</option>
+
+                <option>Balochistan</option>
+
+                <option>Gilgit Baltistan</option>
+
+                <option>Azad Kashmir</option>
+
+            </select>
+
+
+            <label>Category</label>
+
+            <select id="category" required>
+
+                <option value="">Select Category</option>
+
+                <option>Languages</option>
+
+                <option>Festivals</option>
+
+                <option>Food</option>
+
+                <option>Music</option>
+
+                <option>Arts & Handicrafts</option>
+
+                <option>Tourism</option>
+
+                <option>Heritage</option>
+
+            </select>
+
+
+            <label>Tags (comma separated, optional)</label>
+
+            <input type="text" id="tags" placeholder="e.g. mountains, lake, hunza">
+
+
+            <label>Photo / Document</label>
+
+            <input
+            type="file"
+            id="file">
+
+
+            <button
+            type="submit"
+            class="submit-btn">
+
+            Submit Contribution
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="my-contributions">
+
+        <h2>My Contributions</h2>
+
+        <div id="myContributions">
+
+            <div class="empty-box">
+
+                <h3>No Contributions Yet</h3>
+
+                <p>
+                    Your submitted contributions will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+
+<!-- LOGIN / SIGNUP POPUP -->
+
+<div class="popup-overlay" id="authPopup">
+
+  <div class="popup-container">
+
+    <!-- LEFT IMAGE -->
+
+    <div class="popup-left">
+      <img src="images/login image.png">
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="popup-right">
+
+      <!-- CLOSE BUTTON -->
+
+      <span class="close-btn" id="closePopup">
+        &times;
+      </span>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button class="tab active" id="loginTab">
+          Login
+        </button>
+
+        <button class="tab" id="signupTab">
+          Signup
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Login
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm" style="display:none;">
+
+        <div class="input-group">
+          <input type="text"
+          placeholder="Full Name"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="email"
+          placeholder="Email"
+          required>
+        </div>
+
+        <div class="input-group">
+          <input type="password"
+          placeholder="Password"
+          required>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Create Account
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module" src="popup.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="page-guard.js"></script>
+
+<script type="module" src="contribute.js"></script>
+
+</body>
+
+</html>

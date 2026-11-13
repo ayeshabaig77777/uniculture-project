@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City — UniCulture</title>
+<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="culture.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script src="theme.js"></script>
+<header class="navbar">
+<div class="brand">
+<img src="images/logo1.png" class="logo">
+<div>
+<span class="uni">Uni</span><span class="culture">Culture</span><br>
+<small class="tagline">Bringing Cultures Together</small>
+</div>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-item dropdown">
+      <a href="categories.html">Categories <span class="dropdown-caret">&#9662;</span></a>
+      <div class="nav-dropdown-menu">
+        <a href="heritage.html">Heritage Sites</a>
+        <a href="languages.html">Languages</a>
+        <a href="festivals.html">Festivals</a>
+        <a href="music.html">Music &amp; Dance</a>
+        <a href="food.html">Traditional Food</a>
+        <a href="handicrafts.html">Arts &amp; Handicrafts</a>
+      </div>
+    </div>
+    <a href="heritage.html">Heritage</a>
+    <a href="cultural-map.html">Map</a>
+    <a href="events.html">Events</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="about.html">About</a>
+<a href="community.html">Community</a>
+    <a href="contribute.html" class="contribute-btn protected-btn">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+    Contribute
+</a>
+
+  </nav>
+  <span id="auth-area"></span>
+</header>
+
+<div class="v-page" id="page"></div>
+
+<div class="v-lb" id="lb"><div class="v-lb-box" id="lbBox"></div><button class="v-lb-x" id="lbX" aria-label="Close">✕</button></div>
+
+<footer class="footer-v2">
+
+  <div class="footer-v2-grid">
+
+    <div class="footer-col">
+      <h4><span class="uni">Uni</span><span class="culture">Culture</span></h4>
+      <p>A living, community-built portrait of Pakistan — its heritage, festivals, food, and people.</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Explore</p>
+      <a href="heritage.html">Heritage</a>
+      <a href="festivals.html">Festivals</a>
+      <a href="food.html">Food</a>
+      <a href="music.html">Music &amp; Dance</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">Interact</p>
+      <a href="profile.html">My Dashboard</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
+      <a href="cultural-map.html">Cultural Map</a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-heading">About</p>
+      <a href="about.html">About Us</a>
+      <p class="footer-blurb">A final-year project celebrating the plural cultures of Pakistan.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-v2-bottom">
+    <span>© 2026 UniCulture — Cultural Preservation Project Pakistan</span>
+    <span class="footer-urdu">پاکستان کی ثقافت</span>
+  </div>
+
+</footer>
+
+<script type="module" src="popup.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module">
+import { CITIES } from "./city-data.js";
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const page = document.getElementById("page");
+const id = new URLSearchParams(location.search).get("id");
+const city = CITIES.find((c) => c.id === id);
+
+/* ---------- video helpers ---------- */
+function ytId(v) {
+  if (!v) return "";
+  const m = String(v).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+  if (m) return m[1];
+  return /^[\w-]{11}$/.test(String(v).trim()) ? String(v).trim() : "";
+}
+const isFile = (v) => /\.(mp4|webm|ogg)(\?|$)/i.test(v || "");
+const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+
+const lb = document.getElementById("lb"), lbBox = document.getElementById("lbBox");
+function openVideo(v) {
+  if (isFile(v)) lbBox.innerHTML = `<video src="${esc(v)}" controls autoplay muted playsinline></video>`;
+  else { const y = ytId(v); if (!y) return;
+    lbBox.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${y}?autoplay=1&mute=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`; }
+  lb.classList.add("open"); document.body.style.overflow = "hidden";
+}
+function closeVideo() { lb.classList.remove("open"); lbBox.innerHTML = ""; document.body.style.overflow = ""; }
+document.getElementById("lbX").onclick = closeVideo;
+lb.addEventListener("click", (e) => { if (e.target === lb) closeVideo(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeVideo(); });
+
+/* ---------- page ---------- */
+function heroVideoHtml(v) {
+  if (isFile(v)) return `<div class="v-vid"><video src="${esc(v)}" autoplay muted loop playsinline></video></div>`;
+  const y = ytId(v); if (!y) return "";
+  return `<div class="v-vid"><div id="heroYT"></div>${city && city.softCenter ? `<span class="v-soft"></span>` : ""}</div>`;
+}
+
+
+// if a photo is missing, try other file types (.jpeg .png .webp), then quietly drop the photo
+window.SHOW_MISSING_PHOTOS = true;   // true: a missing photo shows which file is expected. Set to false when all photos are in place.
+window.imgFail = (img) => {
+  const exts = ["jpg", "jpeg", "png", "webp", "jfif"];
+  if (!img.dataset.orig) img.dataset.orig = img.getAttribute("src");
+  const base = img.dataset.base || img.dataset.orig.replace(/\.\w+$/, "");
+  img.dataset.base = base;
+  const n = Number(img.dataset.n || 0) + 1;
+  img.dataset.n = n;
+  if (n < exts.length) { img.src = base + "." + exts[n]; return; }
+  const box = img.closest(".v-pimg"); if (!box) return;
+  if (window.SHOW_MISSING_PHOTOS) box.innerHTML = `<div class="v-miss">📷 Photo not found<small>${img.dataset.orig}</small></div>`;
+  else box.remove();
+};
+
+// hero film: muted, looping, asks for HD, and can skip the start (heroStart) and the end (heroEnd)
+function initHero(vid, start, end) {
+  window.onYouTubeIframeAPIReady = () => {
+    let timer;
+    const hd = (p) => { try { p.setPlaybackQuality("hd1080"); } catch (e) {} };
+    new YT.Player("heroYT", {
+      videoId: vid,
+      playerVars: { autoplay: 1, mute: 1, controls: 0, modestbranding: 1, playsinline: 1, rel: 0, disablekb: 1, iv_load_policy: 3, cc_load_policy: 0, fs: 0, start: start },
+      events: {
+        onReady: (e) => { e.target.mute(); hd(e.target); e.target.playVideo(); },
+        onStateChange: (e) => {
+          if (e.data === 1) {
+            hd(e.target);
+            if (end) { clearInterval(timer); timer = setInterval(() => { if (e.target.getCurrentTime() >= end) e.target.seekTo(start, true); }, 400); }
+          }
+          if (e.data === 0) { e.target.seekTo(start, true); e.target.playVideo(); }
+        }
+      }
+    });
+  };
+  if (window.YT && window.YT.Player) window.onYouTubeIframeAPIReady();
+  else { const t = document.createElement("script"); t.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(t); }
+}
+
+if (!city) {
+  page.innerHTML = `<div class="v-soon"><h2>City not found</h2><p>We could not find that place.</p><a class="v-btn" href="culture.html">← All cultures</a></div>`;
+} else {
+  document.title = city.name + " — UniCulture";
+  const soon = city.status === "soon";
+  const hv = city.heroVideo || "";
+  const hasVid = !!(isFile(hv) || ytId(hv));
+  const hasImg = !hasVid && !!city.heroImage;   // big photo with a slow zoom, used when there is no hero video
+
+  const hero = `
+    <section class="v-hero ${hasVid || hasImg ? "" : "has-photo"}">
+      <div class="v-bg" style="background-image:url('${esc(city.img)}')"></div>
+      ${hasVid ? heroVideoHtml(hv) : (hasImg ? `<div class="v-vid"><img class="v-kb" src="${esc(city.heroImage)}" alt=""></div>` : "")}
+      <div class="v-shade"></div>
+      <div class="v-hero-in v-rise">
+        <div>
+          <nav class="v-crumbs"><a href="culture.html">Culture</a><span>›</span><a href="culture.html#${encodeURIComponent(city.province)}">${esc(city.province)}</a><span>›</span><b>${esc(city.name)}</b></nav>
+          <small>${esc(city.province.toUpperCase())} · PAKISTAN</small>
+          <h1>${esc(city.name)}</h1>
+          <p>${esc(city.tagline)}</p>
+          <div class="v-actions">
+            ${!soon && city.sections && city.sections.length ? `<a class="v-play" href="#${city.sections[0].id}">Explore ${esc(city.name)}</a>` : ""}
+            ${!soon && city.plan && city.plan.length ? `<a class="v-ghost" href="#plan">📅 Plan your day</a>` : ""}
+            ${!soon ? `<a class="v-ghost" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(city.name + " Pakistan")}" target="_blank" rel="noopener">📍 View on map</a>` : ""}
+            ${soon ? `<span class="v-chip">Coming soon</span>` : `<span class="v-chip">${city.status === "verified" ? "✓ Verified" : "Compiled from public sources"}</span>`}
+          </div>
+        </div>
+        ${hasVid || hasImg ? "" : `<div class="v-photo"><img src="${esc(city.img)}" alt="${esc(city.name)}" style="object-position:${esc(city.imgPos || "center")}"></div>`}
+      </div>
+    </section>`;
+
+  if (soon) {
+    page.innerHTML = hero + `<div class="v-soon"><h2>Coming soon</h2>
+      <p>The culture guide for ${esc(city.name)} is being researched. We only publish what we can back with sources.</p>
+      <p>Know this place well? Help us write it.</p><a class="v-btn" href="contribute.html">✍ Contribute</a></div>`;
+  } else {
+    const list = [];
+    city.sections.forEach((x) => list.push(x));
+    if (city.plan && city.plan.length) list.push({ id: "plan", icon: "📅", title: "One-day plan", short: "Plan your day", planOnly: true });
+    if (city.tips && city.tips.length) list.push({ id: "tips", icon: "🧭", title: "Good to know", tipsOnly: true });
+    const secs = list.map((x, i) => ({ ...x, n: String(i + 1).padStart(2, "0") }));
+
+    const mapsUrl = (q) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+
+    const place = (x) => {
+      const det = [
+        x.facts && x.facts.length ? `<div class="v-chips">${x.facts.map((f) => `<span><b>${esc(f.k)}:</b> ${esc(f.v)}</span>`).join("")}</div>` : "",
+        x.see && x.see.length ? `<ul class="v-see">${x.see.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : "",
+        x.m ? `<p class="v-m">${esc(x.m)}</p>` : "",
+        x.near ? `<p class="v-near"><b>Nearby:</b> ${esc(x.near)}</p>` : "",
+        x.spots && x.spots.length ? `<div class="v-spots">${x.spots.map((sp) => `<a href="${mapsUrl(sp.q)}" target="_blank" rel="noopener"><span>📍 ${esc(sp.n)}</span><small>${esc(sp.a)}</small><em>Maps ↗</em></a>`).join("")}</div>` : ""
+      ].join("");
+      return `
+      <article class="v-place">
+        ${x.img ? `<div class="v-pimg"><img src="${esc(x.img)}" alt="${esc(x.n)}" loading="lazy" style="object-position:${esc(x.imgPos || "center")}" onerror="imgFail(this)"></div>` : ""}
+        <div class="v-pbody">
+          ${x.tag ? `<span class="v-tag">${esc(x.tag)}</span>` : ""}
+          <h3>${esc(x.n)}</h3>
+          <p>${esc(x.s)}</p>
+          ${det ? `<button class="v-tog" type="button" data-l="${x.spots && x.spots.length ? "Where to eat" : "Details"}">${x.spots && x.spots.length ? "Where to eat" : "Details"} ▾</button><div class="v-det">${det}</div>` : ""}
+          ${x.link ? `<a class="v-link" href="${esc(x.link.href)}">${esc(x.link.label)} →</a>` : ""}
+          ${x.q ? `<a class="v-map" href="${mapsUrl(x.q)}" target="_blank" rel="noopener">📍 Open in Google Maps</a>` : ""}
+        </div>
+      </article>`;
+    };
+
+    const section = (s) => {
+      if (s.planOnly) {
+        return `<section class="v-sec" id="plan"><div class="v-sec-head"><span class="v-num">${s.n}</span><h2>Plan your day</h2></div>
+          <p class="v-sub">A simple way to see the best of ${esc(city.name)} in one day. Traffic can be heavy, so keep it relaxed.</p>
+          <div class="v-plan">${city.plan.map((p) => `<div class="v-step"><span class="v-when">${esc(p.when)}</span><div><h4>${esc(p.title)}</h4><p>${esc(p.t)}</p></div></div>`).join("")}</div></section>`;
+      }
+      if (s.tipsOnly) {
+        return `<section class="v-sec" id="tips"><div class="v-sec-head"><span class="v-num">${s.n}</span><h2>Good to know</h2></div>
+          <p class="v-sub">A few simple things that make your trip smoother and more respectful.</p>
+          ${(city.banners || []).map((b) => `<div class="v-banner"><b>${b.b}</b><span>${esc(b.t)}</span></div>`).join("")}
+          <div class="v-tips">${city.tips.map((r) => `<div class="v-tip">${esc(r.t)}</div>`).join("")}</div></section>`;
+      }
+      return `<section class="v-sec" id="${s.id}"><div class="v-sec-head"><span class="v-num">${s.n}</span><h2>${esc(s.title)}</h2></div>
+        <p class="v-sub">${s.sub ? esc(s.sub) : ""}</p>
+        <div class="v-pgrid">${s.cards.slice(0, 3).map(place).join("")}</div>
+        ${s.cards.length > 3 ? `<div class="v-pgrid v-rest">${s.cards.slice(3).map(place).join("")}</div><div class="v-allwrap"><button type="button" class="v-all" data-n="${s.cards.length - 3}">Show ${s.cards.length - 3} more ▾</button></div>` : ""}
+        ${s.more ? `<div class="v-morelink"><a href="${esc(s.more.href)}">${esc(s.more.label)} →</a></div>` : ""}</section>`;
+    };
+
+    const nav = `<nav class="v-nav"><div class="v-nav-in">${secs.map((s) => `<a href="#${s.id}" data-id="${s.id}">${s.icon ? s.icon + " " : ""}${esc(s.short || s.title)}</a>`).join("")}</div></nav>`;
+
+    const facts = `<div class="v-facts"><div class="v-facts-in">${(city.facts || []).map((f) => { const sp = f.b.indexOf(" "); const ic = sp > 0 ? f.b.slice(0, sp) : ""; const lb = sp > 0 ? f.b.slice(sp + 1) : f.b; return `<div class="v-fact"><i class="v-fic">${ic}</i><div><b>${esc(lb)}</b><span>${esc(f.t)}</span></div></div>`; }).join("")}</div></div>`;
+
+    const story = city.story ? `<section class="v-story"><div class="v-story-in"><div class="v-story-t"><span class="v-kicker">Cultural story</span><h2>${esc(city.story.title)}</h2><p>${esc(city.story.text)}</p><div class="v-tagrow">${(city.story.tags || []).map((t) => `<span>${esc(t)}</span>`).join("")}</div></div>${city.story.img ? `<div class="v-story-img"><img src="${esc(city.story.img)}" alt="" loading="lazy" onerror="imgFail(this)"></div>` : ""}</div></section>` : "";
+
+    const cta = `<section class="v-cta"><div class="v-cta-in">
+      <a class="v-cta-a" href="culture.html#${encodeURIComponent(city.province)}"><div><h3>Want to explore more of ${esc(city.province)}?</h3><p>Discover other places and cultures in ${esc(city.province)}.</p></div><span>Explore ${esc(city.province)} →</span></a>
+      <a class="v-cta-b" href="trip-planner.html"><div><h3>Create your personalised trip</h3><p>Use the UniCulture Trip Planner to build an itinerary around your interests.</p></div><span>Plan your trip →</span></a>
+    </div></section>`;
+
+    page.innerHTML = hero + facts + story + nav + `<main class="v-main">${secs.map(section).join("")}</main>` + cta + `
+      <div class="v-foot">
+        <details><summary>Sources (${(city.sources || []).length})</summary>
+          ${(city.sources || []).map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`).join("")}
+        </details>
+        <p class="note">Draft. Please verify details with local sources, and always check your government's latest travel advice before visiting. <a href="contribute.html">✍ Suggest a correction</a></p>
+      </div>`;
+
+    // highlight the section being read
+    const links = [...document.querySelectorAll(".v-nav a")];
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.dataset.id === e.target.id));
+    }), { rootMargin: "-35% 0px -55% 0px" });
+    document.querySelectorAll(".v-sec").forEach((el) => io.observe(el));
+  }
+
+  // make the hero exactly as tall as the free space under the navbar (no gap below it, no overflow)
+  const fitHero = () => {
+    const h = document.querySelector(".v-hero"); if (!h) return;
+    h.style.height = "auto";
+    const top = h.getBoundingClientRect().top + window.scrollY;
+    h.style.height = Math.max(520, window.innerHeight - top) + "px";
+  };
+  fitHero();
+  window.addEventListener("resize", fitHero);
+  window.addEventListener("load", fitHero);
+
+  if (hasVid && ytId(hv)) initHero(ytId(hv), Number(city.heroStart) || 0, Number(city.heroEnd) || 0);
+
+  // clicks: play video, read more, hero play
+  page.addEventListener("click", (e) => {
+    const tg = e.target.closest(".v-tog");
+    if (tg) { const o = tg.closest(".v-place").classList.toggle("open"); tg.textContent = o ? "Less ▴" : tg.dataset.l + " ▾"; return; }
+    const al = e.target.closest(".v-all");
+    if (al) { const r = al.closest("section").querySelector(".v-rest"); const o = r.classList.toggle("show"); al.textContent = o ? "Show less ▴" : `Show ${al.dataset.n} more ▾`; return; }
+    const m = e.target.closest(".v-media.vid"); if (m) { openVideo(m.dataset.v); return; }
+    const mb = e.target.closest(".v-more");
+    if (mb) { const t = mb.nextElementSibling; const open = t.classList.toggle("show"); mb.textContent = open ? "Show less" : "Read more"; return; }
+    if (e.target.closest("#heroPlay")) openVideo(hv);
+  });
+}
+</script>
+</body></html>
